@@ -8,7 +8,6 @@ const ejs = require("ejs");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-
 // ---------------------------------------------------------------------------
 // Faites "npm i" pour installer tous les modules utilisés dans l'application
 // ---------------------------------------------------------------------------
