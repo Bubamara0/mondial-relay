@@ -27,9 +27,7 @@ app.post("/prsearch", (req, res) => {
 
 	//1: Récupérer et valider le body (requête JSON)
 
-	const body = req.body
-
-	console.log(body)
+	console.log(req.body)
 
 	const schema = Joi.object({
 		Pays: Joi.string()
@@ -39,7 +37,7 @@ app.post("/prsearch", (req, res) => {
 		CP: Joi.number().required()
 	})
 
-	const { error } = schema.validate(body);
+	const { error } = schema.validate(req.body);
 
 	if(error) {
 	  res.status(400).send(`Bad Request!\n${error.details[0].message}`)
@@ -49,11 +47,14 @@ app.post("/prsearch", (req, res) => {
 
 	//2: Construire la requête : headers et body a préparer
 
-	const { data } = await axios.post("http://api.mondialrelay.com/Web_Services.asmx?op=WSI4_PointRelais_Recherche", body, {
-		headers: {
-			'content-type': 'text/xml'
-		}
-	})
+	const requestXML = async ()=> {
+		const { data } = await axios.post("http://api.mondialrelay.com/Web_Services.asmx?op=WSI4_PointRelais_Recherche", body, {
+			headers: {
+				'content-type': 'text/xml'
+			}
+		})
+	}
+	requestXML();
 
 	//3: Envoyer la requête et observer la réponse
 	//4: Extraire les infos de la réponse
