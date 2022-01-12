@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 
 const axios = require("axios");
 const md5 = require("md5");
+const { response } = require("express");
+const xml2js = require("xml2js");
 
 // ---------------------------------------------------------------------------
 // Faites "npm i" pour installer tous les modules utilisés dans l'application
@@ -42,9 +44,8 @@ app.post("/prsearch", (req, res) => {
 	}
 
 
-	// res.status(200).send("Good Request!")
-
 	//2: Construire la requête : headers et body a préparer
+	//3: Envoyer la requête et observer la réponse
 
 	const security = md5("BDTEST13" + req.body.Pays + req.body.CP + req.query.nbresults + "PrivateK").toUpperCase();
 	console.log(security);
@@ -66,7 +67,6 @@ app.post("/prsearch", (req, res) => {
 
 
 	
-	
 	const headers = {
 		headers: {
 			'content-type': 'text/xml'
@@ -76,11 +76,20 @@ app.post("/prsearch", (req, res) => {
 	const requestXML = async ()=> {
 
 		const { data } = await axios.post("http://api.mondialrelay.com/Web_Services.asmx?op=WSI4_PointRelais_Recherche", body, headers)
-		res.status(200).send(data)
+
+		const xml = data
+		xml2js.parseString(xml, function (err, result) {
+		const infos = result["soap:Envelope"]["soap:Body"];
+		const infos2 = infos
+    	console.dir(result["soap:Envelope"]);
+		res.status(200).send(infos)
+		});
+
 	}
+
 	requestXML();
 	
-	//3: Envoyer la requête et observer la réponse
+
 	//4: Extraire les infos de la réponse
 	//5: Construire la réponse (JSON)
 	//6: Envoyer la réponse
