@@ -4,8 +4,8 @@ require("dotenv").config();
 const Joi = require("joi");
 const bodyParser = require("body-parser");
 
-
 const axios = require("axios");
+const md5 = require("md5");
 
 // ---------------------------------------------------------------------------
 // Faites "npm i" pour installer tous les modules utilisés dans l'application
@@ -27,8 +27,6 @@ app.post("/prsearch", (req, res) => {
 
 	//1: Récupérer et valider le body (requête JSON)
 
-	console.log(req.body)
-
 	const schema = Joi.object({
 		Pays: Joi.string()
 			.min(2)
@@ -43,19 +41,44 @@ app.post("/prsearch", (req, res) => {
 	  res.status(400).send(`Bad Request!\n${error.details[0].message}`)
 	}
 
-	res.status(200).send("Good Request!")
+	// res.status(200).send("Good Request!")
 
 	//2: Construire la requête : headers et body a préparer
 
+	const security = md5("BDTEST13" + req.body.Pays + req.body.CP + req.query.nbresults + "PrivateK").toUpperCase();
+	console.log(security);
+
+	const body = 
+	`<?xml version="1.0" encoding="utf-8"?>
+	<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	  <soap:Body>
+		<WSI4_PointRelais_Recherche xmlns="http://www.mondialrelay.fr/webservice/">
+		  <Enseigne>BDTEST13</Enseigne>
+		  <Pays>${req.body.Pays}</Pays>
+		  <CP>${req.body.CP}</CP>
+		  <NombreResultats>${req.query.nbresults}</NombreResultats>
+		  <Security>${security}</Security>
+		</WSI4_PointRelais_Recherche>
+	  </soap:Body>
+	</soap:Envelope>`
+
+
+
+	
+	
+	const headers = {
+		headers: {
+			'content-type': 'text/xml'
+		}
+	}
+
 	const requestXML = async ()=> {
-		const { data } = await axios.post("http://api.mondialrelay.com/Web_Services.asmx?op=WSI4_PointRelais_Recherche", body, {
-			headers: {
-				'content-type': 'text/xml'
-			}
-		})
+
+		const { data } = await axios.post("http://api.mondialrelay.com/Web_Services.asmx?op=WSI4_PointRelais_Recherche", body, headers)
+		res.status(200).send(data)
 	}
 	requestXML();
-
+	
 	//3: Envoyer la requête et observer la réponse
 	//4: Extraire les infos de la réponse
 	//5: Construire la réponse (JSON)
