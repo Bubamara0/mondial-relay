@@ -30,10 +30,7 @@ app.post("/prsearch", (req, res) => {
 	//1: Récupérer et valider le body (requête JSON)
 
 	const schema = Joi.object({
-		Pays: Joi.string()
-			.min(2)
-			.max(2)
-			.required(),
+		Pays: Joi.string().min(2).max(2).required(),
 		CP: Joi.number().required()
 	})
 
