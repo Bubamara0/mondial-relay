@@ -28,10 +28,7 @@ app.post("/prsearch", (req, res) => {
 	//1: Récupérer et valider le body (requête JSON)
 
 	const schema = Joi.object({
-		Pays: Joi.string()
-			.min(2)
-			.max(2)
-			.required(),
+		Pays: Joi.string().min(2).max(2).required(),
 		CP: Joi.number().required()
 	})
 
@@ -42,10 +39,7 @@ app.post("/prsearch", (req, res) => {
 	}
 
 
-	// res.status(200).send("Good Request!")
-
 	//2: Construire la requête : headers et body a préparer
-
 	const security = md5("BDTEST13" + req.body.Pays + req.body.CP + req.query.nbresults + "PrivateK").toUpperCase();
 	console.log(security);
 
