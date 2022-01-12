@@ -41,6 +41,7 @@ app.post("/prsearch", (req, res) => {
 	  res.status(400).send(`Bad Request!\n${error.details[0].message}`)
 	}
 
+
 	// res.status(200).send("Good Request!")
 
 	//2: Construire la requête : headers et body a préparer
