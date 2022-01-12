@@ -55,7 +55,7 @@ app.post("/prsearch", (req, res) => {
 		</soap:Body>
 		</soap:Envelope>`;
 
-
+	console.log(req.query.nbresults);
 	const headers = {
 		headers: {
 			'content-type': 'text/xml'
@@ -63,23 +63,54 @@ app.post("/prsearch", (req, res) => {
 	};
 
 
-
-
+	
+	
 	
 	const requestXML = async ()=> {
 
 		const { data } = await axios.post("http://api.mondialrelay.com/Web_Services.asmx?op=WSI4_PointRelais_Recherche", body, headers)
+		// const xml = data
+		xml2js.parseString(data, function (err, result) {
+		const beforeFormating = (result["soap:Envelope"]["soap:Body"])[0].WSI4_PointRelais_RechercheResponse[0].WSI4_PointRelais_RechercheResult[0].PointsRelais[0].PointRelais_Details
 
-		const xml = data
-		xml2js.parseString(xml, function (err, result) {
-		const infos = result["soap:Envelope"]["soap:Body"];
-		const infos2 = infos
-    	console.dir(result["soap:Envelope"]);
-		res.status(200).send(infos)
+		const reformating = [];
+
+		beforeFormating.forEach((e) => {
+			const template = {
+				Num : e.Num[0],
+				Adresse : `${e.LgAdr1[0].trim()}, ${e.LgAdr3[0].trim()}`,
+				Adresse2 : `${e.LgAdr2[0].trim()}, ${e.LgAdr4[0].trim()}`,
+				"Code Postal" : e.CP[0],
+				Ville : e.Ville[0].trim(),
+				Pays : e.Pays[0],
+				Localisation : [
+					e.Localisation1[0].trim(),
+					e.Localisation2[0].trim()
+				],
+				Coordonnees : {
+					Longitude : e.Longitude[0],
+					Latitude: e.Latitude[0]
+				},
+				Horaires : {
+					Lundi : `${e.Horaires_Lundi[0].string[0][1]}h${e.Horaires_Lundi[0].string[0][2]}${e.Horaires_Lundi[0].string[0][3]} - ${e.Horaires_Lundi[0].string[1][0]}${e.Horaires_Lundi[0].string[1][1]}h${e.Horaires_Lundi[0].string[1][2]}${e.Horaires_Lundi[0].string[1][3]}`,
+					Mardi : `${e.Horaires_Mardi[0].string[0][1]}h${e.Horaires_Mardi[0].string[0][2]}${e.Horaires_Mardi[0].string[0][3]} - ${e.Horaires_Mardi[0].string[1][0]}${e.Horaires_Mardi[0].string[1][1]}h${e.Horaires_Mardi[0].string[1][2]}${e.Horaires_Mardi[0].string[1][3]}`,
+					Mercredi : `${e.Horaires_Mercredi[0].string[0][1]}h${e.Horaires_Mercredi[0].string[0][2]}${e.Horaires_Mercredi[0].string[0][3]} - ${e.Horaires_Mercredi[0].string[1][0]}${e.Horaires_Mercredi[0].string[1][1]}h${e.Horaires_Mercredi[0].string[1][2]}${e.Horaires_Mercredi[0].string[1][3]}`,
+					Jeudi : `${e.Horaires_Jeudi[0].string[0][1]}h${e.Horaires_Jeudi[0].string[0][2]}${e.Horaires_Jeudi[0].string[0][3]} - ${e.Horaires_Jeudi[0].string[1][0]}${e.Horaires_Jeudi[0].string[1][1]}h${e.Horaires_Jeudi[0].string[1][2]}${e.Horaires_Jeudi[0].string[1][3]}`,
+					Vendredi : `${e.Horaires_Vendredi[0].string[0][1]}h${e.Horaires_Vendredi[0].string[0][2]}${e.Horaires_Vendredi[0].string[0][3]} - ${e.Horaires_Vendredi[0].string[1][0]}${e.Horaires_Vendredi[0].string[1][1]}h${e.Horaires_Vendredi[0].string[1][2]}${e.Horaires_Vendredi[0].string[1][3]}`,
+					Samedi : `${e.Horaires_Jeudi[0].string[0][1]}h${e.Horaires_Jeudi[0].string[0][2]}${e.Horaires_Jeudi[0].string[0][3]} - ${e.Horaires_Jeudi[0].string[1][0]}${e.Horaires_Jeudi[0].string[1][1]}h${e.Horaires_Jeudi[0].string[1][2]}${e.Horaires_Jeudi[0].string[1][3]}`,
+					Dimanche : `${e.Horaires_Dimanche[0].string[0][1]}h${e.Horaires_Dimanche[0].string[0][2]}${e.Horaires_Dimanche[0].string[0][3]} - ${e.Horaires_Dimanche[0].string[1][0]}${e.Horaires_Dimanche[0].string[1][1]}h${e.Horaires_Dimanche[0].string[1][2]}${e.Horaires_Dimanche[0].string[1][3]}`
+				},
+				Photo : e.URL_Photo[0],
+				Plan : e.URL_Plan[0],
+				Distance : `${e.Distance} km`
+			}
+			reformating.push(template);
+		});
+
+		res.status(200).send(reformating);
 		});
 
 	}
-
 	requestXML();
 	
 
@@ -88,6 +119,7 @@ app.post("/prsearch", (req, res) => {
 	//6: Envoyer la réponse
 });
 
-app.listen(process.env.PORT || 8080, () => {
+const PORT = process.env.port || 8080
+app.listen(PORT, () => {
 	console.log(`Server started on http://localhost:${PORT}`);
 });
