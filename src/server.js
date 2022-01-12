@@ -10,15 +10,11 @@ const md5 = require("md5");
 const { response } = require("express");
 const xml2js = require("xml2js");
 
-// ---------------------------------------------------------------------------
-// Faites "npm i" pour installer tous les modules utilisés dans l'application
-// ---------------------------------------------------------------------------
-
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", (req, res) => {
-	res.send("Our dear homepage");
+	res.send("<h1>Our dear homepage (ᵔ◡ᵔ)</h1>");
 });
 
 app.post("/prsearch", (req, res) => {
@@ -53,8 +49,8 @@ app.post("/prsearch", (req, res) => {
 			<Security>${security}</Security>
 			</WSI4_PointRelais_Recherche>
 		</soap:Body>
-		</soap:Envelope>`;
-
+		</soap:Envelope>`
+	;
 
 	const headers = {
 		headers: {
@@ -62,32 +58,21 @@ app.post("/prsearch", (req, res) => {
 		}
 	};
 
-
-
-
-	
 	const requestXML = async ()=> {
-
 		const { data } = await axios.post("http://api.mondialrelay.com/Web_Services.asmx?op=WSI4_PointRelais_Recherche", body, headers)
-
-		const xml = data
-		xml2js.parseString(xml, function (err, result) {
-		const infos = result["soap:Envelope"]["soap:Body"];
-		const infos2 = infos
-    	console.dir(result["soap:Envelope"]);
-		res.status(200).send(infos)
+		xml2js.parseString(data, function (err, result) {
+			const infos = (result["soap:Envelope"]["soap:Body"])[0].WSI4_PointRelais_RechercheResponse[0].WSI4_PointRelais_RechercheResult[0].PointsRelais[0].PointRelais_Details[0];
+			res.status(200).send(infos);
 		});
-
-	}
-
+	};
 	requestXML();
 	
-
 	//4: Extraire les infos de la réponse
 	//5: Construire la réponse (JSON)
 	//6: Envoyer la réponse
 });
 
-app.listen(process.env.PORT || 8080, () => {
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
 	console.log(`Server started on http://localhost:${PORT}`);
 });
