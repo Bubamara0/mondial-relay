@@ -4,37 +4,29 @@
 const axios = require("axios");
 const express = require("express");
 const app = express();
-const parseString = require('xml2js').parseString;
-const ejs = require("ejs");
 const Joi = require("joi");
 const bodyParser = require("body-parser");
 const md5 = require("md5");
 const { response } = require("express");
 const xml2js = require("xml2js");
-require("dotenv").config();
 
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
 --------------------------------------------------------------- */
-app.set("views engine", "ejs");
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
 
 /* ---------------------------------------------------------------
 # SCRIPT START
 --------------------------------------------------------------- */
-
-const cpRequest = async (req,res) => {
+const cpRequest = async (req, res) => {
 	const schema = Joi.object({
 		Pays: Joi.string().min(2).max(2).required(),
 		// CP: Joi.number().required()
 	});
 
 	const { error } = schema.validate(req.body);
-	if(error) {
-		res.status(400).send(`Bad Request!\n${error.details[0].message}`);
-	};
+	if (error) res.status(400).send(`Bad Request!\n${error.details[0].message}`);
 
 	const security = md5("BDTEST13" + req.body.Pays + req.params.cp + req.query.nbresults + "PrivateK").toUpperCase();
 	console.log(security);
@@ -62,7 +54,7 @@ const cpRequest = async (req,res) => {
 
 	const requestXML = async ()=> {
 		const { data } = await axios.post("http://api.mondialrelay.com/Web_Services.asmx?op=WSI4_PointRelais_Recherche", body, headers)
-
+		
 		xml2js.parseString(data, function (err, result) {
 			const formatingError = (result["soap:Envelope"]["soap:Body"])[0].WSI4_PointRelais_RechercheResponse[0].WSI4_PointRelais_RechercheResult[0].STAT[0];
 
