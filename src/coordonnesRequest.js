@@ -99,13 +99,21 @@ const template = {
     Plan : e.URL_Plan[0],
     Distance : `${e.Distance} m`
 }
-
-reformating.push(template);
 const tabLocalisation = template.Localisation
 
 if(tabLocalisation[0] === "" && tabLocalisation[1] === "") {
     delete template.Localisation;
 }
+
+const tabAdresse2 = template.Adresse2
+
+if(tabAdresse2 === ", ") {
+
+	delete template.Adresse2;
+}
+
+reformating.push(template);
+
 });
 
 res.status(200).send(reformating);

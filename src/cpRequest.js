@@ -85,25 +85,35 @@ const template = {
         Latitude: e.Latitude[0]
     },
     Horaires : {
-        Lundi : `${e.Horaires_Lundi[0].string[0][1]}h${e.Horaires_Lundi[0].string[0][2]}${e.Horaires_Lundi[0].string[0][3]} - ${e.Horaires_Lundi[0].string[1][0]}${e.Horaires_Lundi[0].string[1][1]}h${e.Horaires_Lundi[0].string[1][2]}${e.Horaires_Lundi[0].string[1][3]}`,
-        Mardi : `${e.Horaires_Mardi[0].string[0][1]}h${e.Horaires_Mardi[0].string[0][2]}${e.Horaires_Mardi[0].string[0][3]} - ${e.Horaires_Mardi[0].string[1][0]}${e.Horaires_Mardi[0].string[1][1]}h${e.Horaires_Mardi[0].string[1][2]}${e.Horaires_Mardi[0].string[1][3]}`,
-        Mercredi : `${e.Horaires_Mercredi[0].string[0][1]}h${e.Horaires_Mercredi[0].string[0][2]}${e.Horaires_Mercredi[0].string[0][3]} - ${e.Horaires_Mercredi[0].string[1][0]}${e.Horaires_Mercredi[0].string[1][1]}h${e.Horaires_Mercredi[0].string[1][2]}${e.Horaires_Mercredi[0].string[1][3]}`,
-        Jeudi : `${e.Horaires_Jeudi[0].string[0][1]}h${e.Horaires_Jeudi[0].string[0][2]}${e.Horaires_Jeudi[0].string[0][3]} - ${e.Horaires_Jeudi[0].string[1][0]}${e.Horaires_Jeudi[0].string[1][1]}h${e.Horaires_Jeudi[0].string[1][2]}${e.Horaires_Jeudi[0].string[1][3]}`,
-        Vendredi : `${e.Horaires_Vendredi[0].string[0][1]}h${e.Horaires_Vendredi[0].string[0][2]}${e.Horaires_Vendredi[0].string[0][3]} - ${e.Horaires_Vendredi[0].string[1][0]}${e.Horaires_Vendredi[0].string[1][1]}h${e.Horaires_Vendredi[0].string[1][2]}${e.Horaires_Vendredi[0].string[1][3]}`,
-        Samedi : `${e.Horaires_Samedi[0].string[0][1]}h${e.Horaires_Samedi[0].string[0][2]}${e.Horaires_Samedi[0].string[0][3]} - ${e.Horaires_Samedi[0].string[1][0]}${e.Horaires_Samedi[0].string[1][1]}h${e.Horaires_Samedi[0].string[1][2]}${e.Horaires_Samedi[0].string[1][3]}`,
-        Dimanche : `${e.Horaires_Dimanche[0].string[0][1]}h${e.Horaires_Dimanche[0].string[0][2]}${e.Horaires_Dimanche[0].string[0][3]} - ${e.Horaires_Dimanche[0].string[1][0]}${e.Horaires_Dimanche[0].string[1][1]}h${e.Horaires_Dimanche[0].string[1][2]}${e.Horaires_Dimanche[0].string[1][3]}`
+        Lundi : `${e.Horaires_Lundi[0].string[0][0]}${e.Horaires_Lundi[0].string[0][1]}h${e.Horaires_Lundi[0].string[0][2]}${e.Horaires_Lundi[0].string[0][3]} - ${e.Horaires_Lundi[0].string[1][0]}${e.Horaires_Lundi[0].string[1][1]}h${e.Horaires_Lundi[0].string[1][2]}${e.Horaires_Lundi[0].string[1][3]}`,
+        Mardi : `${e.Horaires_Mardi[0].string[0][0]}${e.Horaires_Mardi[0].string[0][1]}h${e.Horaires_Mardi[0].string[0][2]}${e.Horaires_Mardi[0].string[0][3]} - ${e.Horaires_Mardi[0].string[1][0]}${e.Horaires_Mardi[0].string[1][1]}h${e.Horaires_Mardi[0].string[1][2]}${e.Horaires_Mardi[0].string[1][3]}`,
+        Mercredi : `${e.Horaires_Mercredi[0].string[0][0]}${e.Horaires_Mercredi[0].string[0][1]}h${e.Horaires_Mercredi[0].string[0][2]}${e.Horaires_Mercredi[0].string[0][3]} - ${e.Horaires_Mercredi[0].string[1][0]}${e.Horaires_Mercredi[0].string[1][1]}h${e.Horaires_Mercredi[0].string[1][2]}${e.Horaires_Mercredi[0].string[1][3]}`,
+        Jeudi : `${e.Horaires_Jeudi[0].string[0][0]}${e.Horaires_Jeudi[0].string[0][1]}h${e.Horaires_Jeudi[0].string[0][2]}${e.Horaires_Jeudi[0].string[0][3]} - ${e.Horaires_Jeudi[0].string[1][0]}${e.Horaires_Jeudi[0].string[1][1]}h${e.Horaires_Jeudi[0].string[1][2]}${e.Horaires_Jeudi[0].string[1][3]}`,
+        Vendredi : `${e.Horaires_Vendredi[0].string[0][0]}${e.Horaires_Vendredi[0].string[0][1]}h${e.Horaires_Vendredi[0].string[0][2]}${e.Horaires_Vendredi[0].string[0][3]} - ${e.Horaires_Vendredi[0].string[1][0]}${e.Horaires_Vendredi[0].string[1][1]}h${e.Horaires_Vendredi[0].string[1][2]}${e.Horaires_Vendredi[0].string[1][3]}`,
+        Samedi : `${e.Horaires_Samedi[0].string[0][0]}${e.Horaires_Samedi[0].string[0][1]}h${e.Horaires_Samedi[0].string[0][2]}${e.Horaires_Samedi[0].string[0][3]} - ${e.Horaires_Samedi[0].string[1][0]}${e.Horaires_Samedi[0].string[1][1]}h${e.Horaires_Samedi[0].string[1][2]}${e.Horaires_Samedi[0].string[1][3]}`,
+        Dimanche : `${e.Horaires_Dimanche[0].string[0][0]}${e.Horaires_Dimanche[0].string[0][1]}h${e.Horaires_Dimanche[0].string[0][2]}${e.Horaires_Dimanche[0].string[0][3]} - ${e.Horaires_Dimanche[0].string[1][0]}${e.Horaires_Dimanche[0].string[1][1]}h${e.Horaires_Dimanche[0].string[1][2]}${e.Horaires_Dimanche[0].string[1][3]}`
     },
     Photo : e.URL_Photo[0],
     Plan : e.URL_Plan[0],
     Distance : `${e.Distance} m`
 }
-
-reformating.push(template);
 const tabLocalisation = template.Localisation
 
 if(tabLocalisation[0] === "" && tabLocalisation[1] === "") {
     delete template.Localisation;
 }
+
+
+const tabAdresse2 = template.Adresse2
+
+if(tabAdresse2 === ", ") {
+
+	delete template.Adresse2;
+}
+
+
+reformating.push(template);
+
 });
 
 res.status(200).send(reformating);

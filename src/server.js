@@ -36,25 +36,10 @@ app.get("/", (req, res) => res.render("index"));
 app.post("/prsearch/cp/:cp", (req,res) => cpRequest(req,res));
 app.post("/prsearch/city/:ville", (req,res) => villeRequest(req,res));
 app.post("/prsearch/:cp/:ville", (req,res) => villeCpRequest(req,res));
+app.post("/prsearch/coordonnes", (req,res) => coordonneesRequest(req,res));
 
 const PORT = process.env.port || 8080
 
 app.listen(PORT, () => {
 	console.log(`Server started on http://localhost:${PORT}`);
 });
-
-app.post("/prsearch/cp/:cp", (req,res) => {
-	cpRequest(req,res);
-})
-
-app.post("/prsearch/city/:ville", (req,res) => {
-	villeRequest(req,res);
-})
-
-app.post("/prsearch/:cp/:ville", (req,res) => {
-	villeCpRequest(req,res);
-})
-
-app.post("/prsearch/coordonnees", (req,res) => {
-	coordonneesRequest(req,res);
-})

@@ -112,11 +112,9 @@ if(tabAdresse2 === ", ") {
 	delete template.Adresse2;
 }
 
-	
-
 reformating.push(template);
 	});
-
+	
 	res.status(200).send(reformating);
 
 	});
