@@ -112,5 +112,4 @@ const cpRequest = async (req,res) => {
 	};
 	requestXML();
 };
-
 module.exports = cpRequest;

@@ -19,6 +19,7 @@ require("dotenv").config();
 const cpRequest = require("./cpRequest");
 const villeRequest = require("./villeRequest");
 const villeCpRequest = require("./villeCpRequest");
+const coordonneesRequest = require("./coordonnesRequest");
 
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
@@ -35,9 +36,10 @@ app.get("/", (req, res) => res.render("index"));
 app.post("/prsearch/cp/:cp", (req,res) => cpRequest(req,res));
 app.post("/prsearch/city/:ville", (req,res) => villeRequest(req,res));
 app.post("/prsearch/:cp/:ville", (req,res) => villeCpRequest(req,res));
+app.post("/prsearch/coordonnes", (req,res) => coordonneesRequest(req,res));
 
-/* ---------------------------------------------------------------
-# SERVER LAUNCHING
---------------------------------------------------------------- */
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server started on http://localhost:${PORT}`));
+const PORT = process.env.port || 8080
+
+app.listen(PORT, () => {
+	console.log(`Server started on http://localhost:${PORT}`);
+});
