@@ -73,7 +73,7 @@ const template = {
 Num : e.Num[0],
 Adresse : `${e.LgAdr1[0].trim()}, ${e.LgAdr3[0].trim()}`,
 Adresse2 : `${e.LgAdr2[0].trim()}, ${e.LgAdr4[0].trim()}`,
-"Code Postal" : e.CP[0],
+Code_Postal : e.CP[0],
 Ville : e.Ville[0].trim(),
 Pays : e.Pays[0],
 Localisation : [

@@ -15,6 +15,7 @@ const xml2js = require("xml2js");
 const cpRequest = require("./cpRequest");
 const villeRequest = require("./villeRequest");
 const villeCpRequest = require("./villeCpRequest");
+const coordonneesRequest = require("./coordonnesRequest");
 
 // ---------------------------------------------------------------------------
 // Faites "npm i" pour installer tous les modules utilisés dans l'application
@@ -43,4 +44,8 @@ app.post("/prsearch/city/:ville", (req,res) => {
 
 app.post("/prsearch/:cp/:ville", (req,res) => {
 	villeCpRequest(req,res);
+})
+
+app.post("/prsearch/coordonnees", (req,res) => {
+	coordonneesRequest(req,res);
 })

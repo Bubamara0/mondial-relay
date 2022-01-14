@@ -15,12 +15,13 @@ const xml2js = require("xml2js");
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-const cpRequest = async (req,res) => {
+const coordonneesRequest = async (req,res) => {
 
 
 const schema = Joi.object({
 Pays: Joi.string().min(2).max(2).required(),
-// CP: Joi.number().required()
+Latitude: Joi.string().required(),
+Longitude: Joi.string().required()
 });
 
 const { error } = schema.validate(req.body);
@@ -28,7 +29,7 @@ if(error) {
 res.status(400).send(`Bad Request!\n${error.details[0].message}`);
 };
 
-const security = md5("BDTEST13" + req.body.Pays + req.params.cp + req.query.nbresults + "PrivateK").toUpperCase();
+const security = md5("BDTEST13" + req.body.Pays + req.body.Latitude + req.body.Longitude + req.query.nbresults + "PrivateK").toUpperCase();
 console.log(security);
 
 const body = `<?xml version="1.0" encoding="utf-8"?>
@@ -37,7 +38,8 @@ const body = `<?xml version="1.0" encoding="utf-8"?>
 <WSI4_PointRelais_Recherche xmlns="http://www.mondialrelay.fr/webservice/">
 <Enseigne>BDTEST13</Enseigne>
 <Pays>${req.body.Pays}</Pays>
-<CP>${req.params.cp}</CP>
+<Latitude>${req.body.Latitude}</Latitude>
+<Longitude>${req.body.Longitude}</Longitude>
 <NombreResultats>${req.query.nbresults}</NombreResultats>
 <Security>${security}</Security>
 </WSI4_PointRelais_Recherche>
@@ -114,4 +116,4 @@ requestXML();
 
 }
 
-module.exports = cpRequest;
+module.exports = coordonneesRequest;

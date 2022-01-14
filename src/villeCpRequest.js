@@ -74,7 +74,7 @@ const requestXML = async ()=> {
 			Num : e.Num[0],
 			Adresse : `${e.LgAdr1[0].trim()}, ${e.LgAdr3[0].trim()}`,
 			Adresse2 : `${e.LgAdr2[0].trim()}, ${e.LgAdr4[0].trim()}`,
-			"Code Postal" : e.CP[0],
+			Code_Postal : e.CP[0],
 			Ville : e.Ville[0].trim(),
 			Pays : e.Pays[0],
 			Localisation : [
@@ -104,7 +104,17 @@ const requestXML = async ()=> {
 if(tabLocalisation[0] === "" && tabLocalisation[1] === "") {
 	delete template.Localisation;
 }
-		reformating.push(template);
+
+const tabAdresse2 = template.Adresse2
+
+if(tabAdresse2 === ", ") {
+
+	delete template.Adresse2;
+}
+
+	
+
+reformating.push(template);
 	});
 
 	res.status(200).send(reformating);
@@ -113,6 +123,7 @@ if(tabLocalisation[0] === "" && tabLocalisation[1] === "") {
 
 }
 requestXML();
+
 }
 
 module.exports = villeCpRequest;
