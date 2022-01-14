@@ -24,10 +24,11 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", (req, res) => {
-	res.send("Our dear homepage");
+	res.send("<h1>Our dear homepage (ᵔ◡ᵔ)</h1>");
 });
 
 const PORT = process.env.port || 8080
+
 app.listen(PORT, () => {
 	console.log(`Server started on http://localhost:${PORT}`);
 });
