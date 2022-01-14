@@ -1,32 +1,41 @@
-const parseString = require('xml2js').parseString;
+/* ---------------------------------------------------------------
+# MODULE IMPORTS
+--------------------------------------------------------------- */
+const axios = require("axios");
 const express = require("express");
 const app = express();
-require("dotenv").config();
+const parseString = require('xml2js').parseString;
+const ejs = require("ejs");
 const Joi = require("joi");
-
-
 const bodyParser = require("body-parser");
-const axios = require("axios");
 const md5 = require("md5");
 const { response } = require("express");
 const xml2js = require("xml2js");
+require("dotenv").config();
 
-
+/* ---------------------------------------------------------------
+# EXTERNAL SCRIPTS IMPORTS
+--------------------------------------------------------------- */
 const cpRequest = require("./cpRequest");
 const villeRequest = require("./villeRequest");
 const villeCpRequest = require("./villeCpRequest");
 const coordonneesRequest = require("./coordonnesRequest");
 
-// ---------------------------------------------------------------------------
-// Faites "npm i" pour installer tous les modules utilisés dans l'application
-// ---------------------------------------------------------------------------
-
+/* ---------------------------------------------------------------
+# SERVER SETTINGS
+--------------------------------------------------------------- */
+app.set("views engine", "ejs");
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-	res.send("<h1>Our dear homepage (ᵔ◡ᵔ)</h1>");
-});
+/* ---------------------------------------------------------------
+# ROUTES SETTINGS
+--------------------------------------------------------------- */
+app.get("/", (req, res) => res.render("index"));
+app.post("/prsearch/cp/:cp", (req,res) => cpRequest(req,res));
+app.post("/prsearch/city/:ville", (req,res) => villeRequest(req,res));
+app.post("/prsearch/:cp/:ville", (req,res) => villeCpRequest(req,res));
 
 const PORT = process.env.port || 8080
 

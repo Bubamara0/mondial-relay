@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+    list-style: inherit;
+    color: inherit;
+    font-family: "Helvetica", sans-serif;
+    font-size: 1.6rem;
+}
+
+html{
+    font-size : 62.5%;
+    height: 100%;
+}
+h1{font-size: 2.4rem}
+h2{font-size: 2.2rem}
+h3{font-size: 1.8rem}
+
+
+main, body{
+    height: 100%;
+}
+section{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-flow: column nowrap;
+    max-width: 25.6rem;
+    padding: .8rem;
+    background-color: #fefefe;
+    box-shadow: #29292933 1px 1px 8px;
+}
+
+form h1{
+    text-align: center;
+}
+
+form input{
+    padding: .8rem;
+    margin: .8rem;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+form select{
+    padding: .8rem;
+    margin: .8rem;
+}
