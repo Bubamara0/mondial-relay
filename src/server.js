@@ -1,6 +1,7 @@
 const parseString = require('xml2js').parseString;
 const express = require("express");
 const app = express();
+const ejs = require("ejs");
 require("dotenv").config();
 const Joi = require("joi");
 const bodyParser = require("body-parser");
@@ -10,15 +11,17 @@ const md5 = require("md5");
 const { response } = require("express");
 const xml2js = require("xml2js");
 
+app.set("views engine", "ejs");
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-	res.send("<h1>Our dear homepage (ᵔ◡ᵔ)</h1>");
+	res.render("index.ejs");
 });
 
 app.post("/prsearch", (req, res) => {
-	// console.log(req.body);
+	console.log(req.body);
 	// console.log(req.query.nbresults);
 
 	//1: Récupérer et valider le body (requête JSON)
@@ -29,7 +32,7 @@ app.post("/prsearch", (req, res) => {
 
 	const { error } = schema.validate(req.body);
 	if(error) {
-	  res.status(400).send(`Bad Request!\n${error.details[0].message}`);
+		res.status(400).send(`Bad Request!\n${error.details[0].message}`);
 	};
 
 	//2: Construire la requête : headers et body a préparer
