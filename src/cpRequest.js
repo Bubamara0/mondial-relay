@@ -70,7 +70,7 @@ const cpRequest = async (req, res) => {
 					Num : e.Num[0],
 					Adresse : `${e.LgAdr1[0].trim()}, ${e.LgAdr3[0].trim()}`,
 					Adresse2 : `${e.LgAdr2[0].trim()}, ${e.LgAdr4[0].trim()}`,
-					"Code Postal" : e.CP[0],
+					Code_Postal : e.CP[0],
 					Ville : e.Ville[0].trim(),
 					Pays : e.Pays[0],
 					Localisation : [
@@ -78,8 +78,8 @@ const cpRequest = async (req, res) => {
 						e.Localisation2[0].trim()
 					],
 					Coordonnees : {
-						Longitude : e.Longitude[0],
-						Latitude: e.Latitude[0]
+						longitude : e.Longitude[0],
+						latitude: e.Latitude[0]
 					},
 					Horaires : {
 						Lundi : `${e.Horaires_Lundi[0].string[0][0]}${e.Horaires_Lundi[0].string[0][1]}h${e.Horaires_Lundi[0].string[0][2]}${e.Horaires_Lundi[0].string[0][3]} - ${e.Horaires_Lundi[0].string[1][0]}${e.Horaires_Lundi[0].string[1][1]}h${e.Horaires_Lundi[0].string[1][2]}${e.Horaires_Lundi[0].string[1][3]}`,
@@ -94,9 +94,20 @@ const cpRequest = async (req, res) => {
 					Plan : e.URL_Plan[0],
 					Distance : `${e.Distance} m`
 				};
-				if(tmp.Localisation[0] === "" && tmp.Localisation[1] === "") {
-					delete tmp.Localisation;
-				};
+
+				// Remplacement des horaires "00h00 - 00h00" en "Fermé"
+				Object.keys(tmp.Horaires).forEach(jour => tmp.Horaires[jour] = tmp.Horaires[jour] === "00h00 - 00h00" ? "Fermé" : tmp.Horaires[jour]);
+
+				const tmpObject = {};
+				Object.keys(tmp.Horaires).forEach(jour => {
+					if (tmpObject.hasOwnProperty(jour)) {
+						tmpObject[tmp.Horaires[jour]].push(jour);
+					};
+					tmpObject[tmp.Horaires[jour]] = [jour];
+				});
+				console.log(tmpObject);
+
+				if(tmp.Localisation[0] === "" && tmp.Localisation[1] === "") delete tmp.Localisation;
 				formated.push(tmp);
 			});
 			res.status(200).send(formated);
