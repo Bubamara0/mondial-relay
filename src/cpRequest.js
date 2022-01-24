@@ -108,7 +108,13 @@ const cpRequest = async (req, res) => {
 				};
 				filterSchedules();
 
-				if(tmp.Localisation[0] === "" && tmp.Localisation[1] === "") delete tmp.Localisation;
+				if (tmp.Localisation[0] === "" && tmp.Localisation[1] === ""){
+					delete tmp.Localisation;
+				} else {
+					tmp.Localisation.forEach((loc, i) => {
+						if (loc === "") delete tmp.Localisation.splice(i, i);
+					});
+				};
 				if(tmp.Adresse2 === ", ") delete tmp.Adresse2;
 				formated.push(tmp);
 			});

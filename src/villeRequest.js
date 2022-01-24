@@ -91,7 +91,7 @@ const villeRequest = async (req, res) => {
 					Plan : e.URL_Plan[0],
 					Distance : `${e.Distance} m`
 				};
-				
+
 				Object.keys(tmp.Horaires).forEach(jour => tmp.Horaires[jour] = tmp.Horaires[jour] === "00h00 - 00h00" ? "Fermé" : tmp.Horaires[jour]);
 				const filterSchedules = () => {
 					const tmpObject = {};
@@ -103,8 +103,14 @@ const villeRequest = async (req, res) => {
 					Object.keys(tmpObject).forEach(horaires => tmp.Horaires[tmpObject[horaires].join("_")] = horaires);
 				};
 				filterSchedules();
-
-				if(tmp.Localisation[0] === "" && tmp.Localisation[1] === "") delete tmp.Localisation;
+				
+				if (tmp.Localisation[0] === "" && tmp.Localisation[1] === ""){
+					delete tmp.Localisation;
+				} else {
+					tmp.Localisation.forEach((loc, i) => {
+						if (loc === "") delete tmp.Localisation.splice(i, i);
+					});
+				};
 				if(tmp.Adresse2 === ", ") delete tmp.Adresse2;
 				formated.push(tmp);
 			});
