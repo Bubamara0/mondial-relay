@@ -58,6 +58,7 @@ const cpRequest = async (req, res) => {
 		xml2js.parseString(data, function (err, result) {
 			const formatingError = (result["soap:Envelope"]["soap:Body"])[0].WSI4_PointRelais_RechercheResponse[0].WSI4_PointRelais_RechercheResult[0].STAT[0];
 
+			// Patch du bug du 0
 			if((result["soap:Envelope"]["soap:Body"])[0].WSI4_PointRelais_RechercheResponse[0].WSI4_PointRelais_RechercheResult[0].PointsRelais === undefined) {
 				return res.status(400).send(`Bad Request! API status code: ${formatingError}`);
 			};
@@ -98,14 +99,22 @@ const cpRequest = async (req, res) => {
 				// Remplacement des horaires "00h00 - 00h00" en "Fermé"
 				Object.keys(tmp.Horaires).forEach(jour => tmp.Horaires[jour] = tmp.Horaires[jour] === "00h00 - 00h00" ? "Fermé" : tmp.Horaires[jour]);
 
-				const tmpObject = {};
-				Object.keys(tmp.Horaires).forEach(jour => {
-					if (tmpObject.hasOwnProperty(jour)) {
+				const filterSchedules = () => {
+					// --- Filtrage des horaires
+					const tmpObject = {};
+					Object.keys(tmp.Horaires).forEach(jour => {
+						// On vérifie que la propriété (ex: "08h30 - 12h00") existe, sinon on la crée et on la définit comme étant un array
+						if (!tmpObject.hasOwnProperty(tmp.Horaires[jour])) tmpObject[tmp.Horaires[jour]] = [];
+						// On ajoute le jour sur lequel le forEach itère (ex: "Mercredi") dans le tableau précédemment créé
 						tmpObject[tmp.Horaires[jour]].push(jour);
-					};
-					tmpObject[tmp.Horaires[jour]] = [jour];
-				});
-				console.log(tmpObject);
+						// On supprime la propriété sur laquelle le forEach itère (ex: "Vendredi") de tmp.Horaires
+						delete tmp.Horaires[jour];
+					});
+					// --- Ajout des horaires filtrées
+					// On intègre l'objet précédemment créé dans le tmp (l. 69) en convertissant ses propriétés ("07h00 - 20h00" : ["Lundi", "Mardi", ...])
+					Object.keys(tmpObject).forEach(horaires => tmp.Horaires[tmpObject[horaires].join("_")] = horaires);
+				};
+				filterSchedules();
 
 				if(tmp.Localisation[0] === "" && tmp.Localisation[1] === "") delete tmp.Localisation;
 				formated.push(tmp);
