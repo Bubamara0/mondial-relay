@@ -16,6 +16,8 @@ const villeRequest = require("./villeRequest");
 const villeCpRequest = require("./villeCpRequest");
 const coordonneesRequest = require("./coordonnesRequest");
 
+const creationEtiquette = require("./creationEtiquette");
+
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
 --------------------------------------------------------------- */
@@ -30,6 +32,8 @@ app.use(express.static("public"));
 app.get("/", (req, res) => res.render("index"));
 
 app.use("/prsearch", cpRequest, villeRequest, villeCpRequest, coordonneesRequest);
+
+app.use("/creationEtiquette", creationEtiquette);
 // app.use("/prsearch", villeRequest);
 // app.post("/prsearch/cp/:cp", (req,res) => cpRequest(req,res));
 // app.post("/prsearch/city/:ville", (req,res) => villeRequest(req,res));
