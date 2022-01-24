@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const md5 = require("md5");
 const { response } = require("express");
 const xml2js = require("xml2js");
+const router = express.Router();
 
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
@@ -19,11 +20,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 /* ---------------------------------------------------------------
 # SCRIPT START
 --------------------------------------------------------------- */
-const villeCpRequest = async (req, res) => {
+
+router.post("/:cp/:ville", (req, res) => {
+
+
 	const schema = Joi.object({
 		Pays: Joi.string().min(2).max(2).required(),
-		// Ville: Joi.string().max(25).required(),
-		// CP: Joi.number().required()
 	});
 
 	const { error } = schema.validate(req.body);
@@ -123,5 +125,6 @@ const villeCpRequest = async (req, res) => {
 		});
 	};
 	requestXML();
-};
-module.exports = villeCpRequest;
+})
+
+module.exports = router;
