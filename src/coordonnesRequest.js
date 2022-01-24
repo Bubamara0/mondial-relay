@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const md5 = require("md5");
 const { response } = require("express");
 const xml2js = require("xml2js");
+const router = express.Router();
 
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
@@ -19,7 +20,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 /* ---------------------------------------------------------------
 # SCRIPT START
 --------------------------------------------------------------- */
-const coordonneesRequest = async (req, res) => {
+
+router.post("/coordonnees", (req, res) => {
+
 	const schema = Joi.object({
 		Pays: Joi.string().min(2).max(2).required(),
 		Latitude: Joi.string().required(),
@@ -123,5 +126,7 @@ const coordonneesRequest = async (req, res) => {
 		});
 	};
 	requestXML();
-};
-module.exports = coordonneesRequest;
+
+})
+
+module.exports = router;

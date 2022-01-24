@@ -9,6 +9,8 @@ const bodyParser = require("body-parser");
 const md5 = require("md5");
 const { response } = require("express");
 const xml2js = require("xml2js");
+const villeCpRequest = require("./villeCpRequest");
+const router = express.Router();
 
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
@@ -19,7 +21,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 /* ---------------------------------------------------------------
 # SCRIPT START
 --------------------------------------------------------------- */
-const villeRequest = async (req, res) => {
+
+router.post('/city/:ville', (req, res) => {
+
 	const schema = Joi.object({
 		Pays: Joi.string().min(2).max(2).required(),
 	});
@@ -118,5 +122,6 @@ const villeRequest = async (req, res) => {
 		});
 	};
 	requestXML();
-};
-module.exports = villeRequest;
+})
+
+module.exports = router;
