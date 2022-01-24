@@ -90,17 +90,22 @@ const villeRequest = async (req, res) => {
 					Photo : e.URL_Photo[0],
 					Plan : e.URL_Plan[0],
 					Distance : `${e.Distance} m`
-				}
-				const tabLocalisation = tmp.Localisation
+				};
+				
+				Object.keys(tmp.Horaires).forEach(jour => tmp.Horaires[jour] = tmp.Horaires[jour] === "00h00 - 00h00" ? "Fermé" : tmp.Horaires[jour]);
+				const filterSchedules = () => {
+					const tmpObject = {};
+					Object.keys(tmp.Horaires).forEach(jour => {
+						if (!tmpObject.hasOwnProperty(tmp.Horaires[jour])) tmpObject[tmp.Horaires[jour]] = [];
+						tmpObject[tmp.Horaires[jour]].push(jour);
+						delete tmp.Horaires[jour];
+					});
+					Object.keys(tmpObject).forEach(horaires => tmp.Horaires[tmpObject[horaires].join("_")] = horaires);
+				};
+				filterSchedules();
 
-				if(tabLocalisation[0] === "" && tabLocalisation[1] === "") {
-					delete tmp.Localisation;
-				}
-				const tabAdresse2 = tmp.Adresse2
-
-				if(tabAdresse2 === ", ") {
-					delete tmp.Adresse2;
-				}
+				if(tmp.Localisation[0] === "" && tmp.Localisation[1] === "") delete tmp.Localisation;
+				if(tmp.Adresse2 === ", ") delete tmp.Adresse2;
 				formated.push(tmp);
 			});
 			res.status(200).send(formated);

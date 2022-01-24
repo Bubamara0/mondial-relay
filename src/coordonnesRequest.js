@@ -96,6 +96,19 @@ const coordonneesRequest = async (req, res) => {
 					Plan : e.URL_Plan[0],
 					Distance : `${e.Distance} m`
 				}
+
+				Object.keys(tmp.Horaires).forEach(jour => tmp.Horaires[jour] = tmp.Horaires[jour] === "00h00 - 00h00" ? "Fermé" : tmp.Horaires[jour]);
+				const filterSchedules = () => {
+					const tmpObject = {};
+					Object.keys(tmp.Horaires).forEach(jour => {
+						if (!tmpObject.hasOwnProperty(tmp.Horaires[jour])) tmpObject[tmp.Horaires[jour]] = [];
+						tmpObject[tmp.Horaires[jour]].push(jour);
+						delete tmp.Horaires[jour];
+					});
+					Object.keys(tmpObject).forEach(horaires => tmp.Horaires[tmpObject[horaires].join("_")] = horaires);
+				};
+				filterSchedules();
+
 				if(tmp.Localisation[0] === "" && tmp.Localisation[1] === "") delete tmp.Localisation;
 				if(tmp.Adresse2 === ", ") delete tmp.Adresse2;
 				formated.push(tmp);

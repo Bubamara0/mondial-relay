@@ -96,27 +96,20 @@ const cpRequest = async (req, res) => {
 					Distance : `${e.Distance} m`
 				};
 
-				// Remplacement des horaires "00h00 - 00h00" en "Fermé"
 				Object.keys(tmp.Horaires).forEach(jour => tmp.Horaires[jour] = tmp.Horaires[jour] === "00h00 - 00h00" ? "Fermé" : tmp.Horaires[jour]);
-
 				const filterSchedules = () => {
-					// --- Filtrage des horaires
 					const tmpObject = {};
 					Object.keys(tmp.Horaires).forEach(jour => {
-						// On vérifie que la propriété (ex: "08h30 - 12h00") existe, sinon on la crée et on la définit comme étant un array
 						if (!tmpObject.hasOwnProperty(tmp.Horaires[jour])) tmpObject[tmp.Horaires[jour]] = [];
-						// On ajoute le jour sur lequel le forEach itère (ex: "Mercredi") dans le tableau précédemment créé
 						tmpObject[tmp.Horaires[jour]].push(jour);
-						// On supprime la propriété sur laquelle le forEach itère (ex: "Vendredi") de tmp.Horaires
 						delete tmp.Horaires[jour];
 					});
-					// --- Ajout des horaires filtrées
-					// On intègre l'objet précédemment créé dans le tmp (l. 69) en convertissant ses propriétés ("07h00 - 20h00" : ["Lundi", "Mardi", ...])
 					Object.keys(tmpObject).forEach(horaires => tmp.Horaires[tmpObject[horaires].join("_")] = horaires);
 				};
 				filterSchedules();
 
 				if(tmp.Localisation[0] === "" && tmp.Localisation[1] === "") delete tmp.Localisation;
+				if(tmp.Adresse2 === ", ") delete tmp.Adresse2;
 				formated.push(tmp);
 			});
 			res.status(200).send(formated);
