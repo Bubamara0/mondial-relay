@@ -107,6 +107,12 @@ router.post("/", (req, res) => {
 		xml2js.parseString(data, function (err, result) {
 
 			const beforeFormating = (result["soap:Envelope"]["soap:Body"])[0].WSI2_CreationEtiquetteResponse[0].WSI2_CreationEtiquetteResult;
+      const formatingError = (result["soap:Envelope"]["soap:Body"])[0].WSI2_CreationEtiquetteResponse[0].WSI2_CreationEtiquetteResult[0].STAT[0];
+
+      if (beforeFormating[0].ExpeditionNum === undefined) {
+        return res.status(400).send(`Bad Request !\n API status code : ${formatingError}`);
+
+      }
 
             
 			const tmp = {
