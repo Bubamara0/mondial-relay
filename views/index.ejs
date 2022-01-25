@@ -20,41 +20,43 @@
 		<section>
 			<form action="/creationEtiquette" method="POST">
 				<h1>Création étiquette</h1>
-				<select name="ModeCol" id="ModeCol">
-					<option value="CCC">CCC</option>
-					<option value="CDR">CDR</option>
-					<option value="CDS">CDS</option>
-					<option value="REL">REL</option>
-				</select>
-				<input type="text" name="ModeLiv" placeholder="Mode de livraison">
-				<div>
-					<input type="text" name="Langage_expediteur" placeholder="Langage de l'expediteur">
-					<input type="text" name="Nom_expediteur" placeholder="Nom de l'expediteur">
-					<input type="text" name="Rue_expediteur" placeholder="Rue de l'expediteur">
-					<input type="text" name="Ville_expediteur" placeholder="Ville de l'expediteur">
-					<input type="text" name="Code_postal_expediteur" placeholder="Code Postal de l'expediteur">
-					<input type="text" name="Pays_expediteur" placeholder="Pays de l'expediteur">
-					<input type="text" name="Telephone_expediteur" placeholder="Téléphone de l'expediteur">
-					<input type="text" name="Mail_expediteur" placeholder="Mail de l'expediteur">
-				</div>
-				<div>
-					<input type="text" name="Langage_destinataire" placeholder="Langage du destinataire">
-					<input type="text" name="Nom_destinataire" placeholder="Nom du destinataire">
-					<input type="text" name="Rue_destinataire" placeholder="Rue du destinataire">
-					<input type="text" name="Ville_destinataire" placeholder="Ville du destinataire">
-					<input type="text" name="Code_postal_destinataire" placeholder="Code postal du destinataire">
-					<input type="text" name="Pays_destinataire" placeholder="Pays du destinataire">
-					<input type="text" name="Telephone_destinataire" placeholder="Téléphone du destinataire">
-					<input type="text" name="Mail_destinataire" placeholder="Mail du destinataire">
-				</div>
-				<div>
-					<input type="number" name="Poids" placeholder="Poids">
-					<input type="text" name="Nombre_colis" placeholder="Nombre de colis">
-					<input type="number" name="Montant_contre_remboursement" placeholder="Montant contre remboursement">
-					<input type="text" name="COL_Rel_Pays" placeholder="Pays du Relay de collecte">
-					<input type="text" name="COL_Rel" placeholder="Relay de collecte">
-					<input type="text" name="LIV_Rel_Pays" placeholder="Pays du Relay de livraison">
-					<input type="text" name="LIV_Rel" placeholder="Relay de livraison">
+				<div class="row">
+					<div class="column">
+						<input type="text" name="Langage_expediteur" placeholder="Langage de l'expediteur">
+						<input type="text" name="Nom_expediteur" placeholder="Nom de l'expediteur">
+						<input type="text" name="Rue_expediteur" placeholder="Rue de l'expediteur">
+						<input type="text" name="Ville_expediteur" placeholder="Ville de l'expediteur">
+						<input type="text" name="Code_postal_expediteur" placeholder="Code Postal de l'expediteur">
+						<input type="text" name="Pays_expediteur" placeholder="Pays de l'expediteur">
+						<input type="text" name="Telephone_expediteur" placeholder="Téléphone de l'expediteur">
+						<input type="text" name="Mail_expediteur" placeholder="Mail de l'expediteur">
+					</div>
+					<div class="column">
+						<input type="text" name="Langage_destinataire" placeholder="Langage du destinataire">
+						<input type="text" name="Nom_destinataire" placeholder="Nom du destinataire">
+						<input type="text" name="Rue_destinataire" placeholder="Rue du destinataire">
+						<input type="text" name="Ville_destinataire" placeholder="Ville du destinataire">
+						<input type="text" name="Code_postal_destinataire" placeholder="Code postal du destinataire">
+						<input type="text" name="Pays_destinataire" placeholder="Pays du destinataire">
+						<input type="text" name="Telephone_destinataire" placeholder="Téléphone du destinataire">
+						<input type="text" name="Mail_destinataire" placeholder="Mail du destinataire">
+					</div>
+					<div class="column">
+						<select name="ModeCol" id="ModeCol">
+							<option value="CCC">CCC</option>
+							<option value="CDR">CDR</option>
+							<option value="CDS">CDS</option>
+							<option value="REL">REL</option>
+						</select>
+						<input type="text" name="ModeLiv" placeholder="Mode de livraison">
+						<input type="number" name="Poids" placeholder="Poids">
+						<input type="text" name="Nombre_colis" placeholder="Nombre de colis">
+						<input type="number" name="Montant_contre_remboursement" placeholder="Montant contre remboursement">
+						<input type="text" name="COL_Rel_Pays" placeholder="Pays du Relay de collecte">
+						<input type="text" name="COL_Rel" placeholder="Relay de collecte">
+						<input type="text" name="LIV_Rel_Pays" placeholder="Pays du Relay de livraison">
+						<input type="text" name="LIV_Rel" placeholder="Relay de livraison">
+					</div>
 				</div>
 				<input type="submit" value="Envoyer">
 			</form>

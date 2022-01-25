@@ -11,7 +11,7 @@ section{
 form{
     display: flex;
     flex-flow: column nowrap;
-    max-width: 25.6rem;
+    max-width: 65.6rem;
     padding: .8rem;
     background-color: #fefefe;
     box-shadow: #29292933 1px 1px 8px;
@@ -33,4 +33,12 @@ input[type=number]::-webkit-outer-spin-button {
 form select{
     padding: .8rem;
     margin: .8rem;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+}
+.column{
+    display: flex;
+    flex-direction: column;
 }
