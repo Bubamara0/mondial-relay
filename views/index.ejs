@@ -27,43 +27,42 @@
 					<option value="REL">REL</option>
 				</select>
 				<input type="text" name="ModeLiv" placeholder="Mode de livraison">
-				<input type="text" name="Langage_expediteur" placeholder="Langage de l'expediteur">
-				<input type="text" name="Nom_expediteur" placeholder="Nom de l'expediteur">
-				<input type="text" name="Rue_expediteur" placeholder="Rue de l'expediteur">
-				<input type="text" name="Ville_expediteur" placeholder="Ville de l'expediteur">
-				<input type="text" name="Code_postal_expediteur" placeholder="Code Postal de l'expediteur">
-				<input type="text" name="Pays_expediteur" placeholder="Pays de l'expediteur">
-				<input type="text" name="Telephone_expediteur" placeholder="Téléphone de l'expediteur">
-				<input type="text" name="Mail_expediteur" placeholder="Mail de l'expediteur">
-				<input type="text" name="Langage_destinataire" placeholder="Langage du destinataire">
-				<input type="text" name="Nom_destinataire" placeholder="Nom du destinataire">
-				<input type="text" name="Rue_destinataire" placeholder="Rue du destinataire">
-				<input type="text" name="Ville_destinataire" placeholder="Ville du destinataire">
-				<input type="text" name="Code_postal_destinataire" placeholder="Code postal du destinataire">
-				<input type="text" name="Pays_destinataire" placeholder="Pays du destinataire">
-				<input type="text" name="Telephone_destinataire" placeholder="Téléphone du destinataire">
-				<input type="text" name="Mail_destinataire" placeholder="Mail du destinataire">
-				<input type="number" name="Poids" placeholder="Poids">
-				<input type="text" name="Nombre_colis" placeholder="Nombre de colis">
-				<input type="number" name="Montant_contre_remboursement" placeholder="Montant contre remboursement">
-				<input type="text" name="COL_Rel_Pays" placeholder="Pays du Relay de collecte">
-				<input type="text" name="COL_Rel" placeholder="Relay de collecte">
-				<input type="text" name="LIV_Rel_Pays" placeholder="Pays du Relay de livraison">
-				<input type="text" name="LIV_Rel" placeholder="Relay de livraison">
+				<div>
+					<input type="text" name="Langage_expediteur" placeholder="Langage de l'expediteur">
+					<input type="text" name="Nom_expediteur" placeholder="Nom de l'expediteur">
+					<input type="text" name="Rue_expediteur" placeholder="Rue de l'expediteur">
+					<input type="text" name="Ville_expediteur" placeholder="Ville de l'expediteur">
+					<input type="text" name="Code_postal_expediteur" placeholder="Code Postal de l'expediteur">
+					<input type="text" name="Pays_expediteur" placeholder="Pays de l'expediteur">
+					<input type="text" name="Telephone_expediteur" placeholder="Téléphone de l'expediteur">
+					<input type="text" name="Mail_expediteur" placeholder="Mail de l'expediteur">
+				</div>
+				<div>
+					<input type="text" name="Langage_destinataire" placeholder="Langage du destinataire">
+					<input type="text" name="Nom_destinataire" placeholder="Nom du destinataire">
+					<input type="text" name="Rue_destinataire" placeholder="Rue du destinataire">
+					<input type="text" name="Ville_destinataire" placeholder="Ville du destinataire">
+					<input type="text" name="Code_postal_destinataire" placeholder="Code postal du destinataire">
+					<input type="text" name="Pays_destinataire" placeholder="Pays du destinataire">
+					<input type="text" name="Telephone_destinataire" placeholder="Téléphone du destinataire">
+					<input type="text" name="Mail_destinataire" placeholder="Mail du destinataire">
+				</div>
+				<div>
+					<input type="number" name="Poids" placeholder="Poids">
+					<input type="text" name="Nombre_colis" placeholder="Nombre de colis">
+					<input type="number" name="Montant_contre_remboursement" placeholder="Montant contre remboursement">
+					<input type="text" name="COL_Rel_Pays" placeholder="Pays du Relay de collecte">
+					<input type="text" name="COL_Rel" placeholder="Relay de collecte">
+					<input type="text" name="LIV_Rel_Pays" placeholder="Pays du Relay de livraison">
+					<input type="text" name="LIV_Rel" placeholder="Relay de livraison">
+				</div>
 				<input type="submit" value="Envoyer">
 			</form>
 		</section>
 	</main>
 	<%- include("_footer") %>
 </body>
-<script>
-	const select = document.querySelector("select");
-	select.innerHTML = '';
-	for (let i = 0; i < 30; i++) {
-		select.innerHTML += `
-			<option value="${i}" ${i === 10 ? "selected" : ""}>${i}</option>
-		`;
-	}
-</script>
+
+
 <script src="/js/form.js"></script>
 </html>
