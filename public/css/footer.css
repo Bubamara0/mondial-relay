@@ -27,9 +27,6 @@ footer .footer-content{
     margin: .8rem 0;
 }
 
-.footer-content li{
-    /* text-align: center; */
-}
 .footer-content a:hover {
     text-decoration: underline;
 }
