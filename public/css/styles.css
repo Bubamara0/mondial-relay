@@ -12,6 +12,7 @@
     padding: 0;
     border-spacing: 0;
     list-style: inherit;
+    text-decoration: inherit;
     color: inherit;
     font-family: "Helvetica", sans-serif;
     font-size: 1.6rem;
