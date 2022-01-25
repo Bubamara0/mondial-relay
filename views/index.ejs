@@ -6,6 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Mondial Relais</title>
 	<link rel="icon" href="/img/logo.png">
+
+	<!-- IMPORTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+
+	<!-- CSS -->
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/navbar.css">
 	<link rel="stylesheet" href="css/index.css">
@@ -17,48 +24,187 @@
 		<%- include("_navbar") %>
 	</header>
 	<main>
-		<section>
+		<section id="form-container">
+			<h1>Création étiquette</h1>
 			<form action="/creationEtiquette" method="POST">
-				<h1>Création étiquette</h1>
-				<input type="text" name="ModeCol" placeholder="Mode de collecte">
-				<input type="text" name="ModeLiv" placeholder="Mode de livraison">
-				<input type="text" name="Langage_expediteur" placeholder="Langage de l'expediteur">
-				<input type="text" name="Nom_expediteur" placeholder="Nom de l'expediteur">
-				<input type="text" name="Rue_expediteur" placeholder="Rue de l'expediteur">
-				<input type="text" name="Ville_expediteur" placeholder="Ville de l'expediteur">
-				<input type="text" name="Code_postal_expediteur" placeholder="Code Postal de l'expediteur">
-				<input type="text" name="Pays_expediteur" placeholder="Pays de l'expediteur">
-				<input type="text" name="Telephone_expediteur" placeholder="Téléphone de l'expediteur">
-				<input type="text" name="Mail_expediteur" placeholder="Mail de l'expediteur">
-				<input type="text" name="Langage_destinataire" placeholder="Langage du destinataire">
-				<input type="text" name="Nom_destinataire" placeholder="Nom du destinataire">
-				<input type="text" name="Rue_destinataire" placeholder="Rue du destinataire">
-				<input type="text" name="Ville_destinataire" placeholder="Ville du destinataire">
-				<input type="text" name="Code_postal_destinataire" placeholder="Code postal du destinataire">
-				<input type="text" name="Pays_destinataire" placeholder="Pays du destinataire">
-				<input type="text" name="Telephone_destinataire" placeholder="Téléphone du destinataire">
-				<input type="text" name="Mail_destinataire" placeholder="Mail du destinataire">
-				<input type="number" name="Poids" placeholder="Poids">
-				<input type="text" name="Nombre_colis" placeholder="Nombre de colis">
-				<input type="number" name="Montant_contre_remboursement" placeholder="Montant contre remboursement">
-				<input type="text" name="COL_Rel_Pays" placeholder="Pays du Relay de collecte">
-				<input type="text" name="COL_Rel" placeholder="Relay de collecte">
-				<input type="text" name="LIV_Rel_Pays" placeholder="Pays du Relay de livraison">
-				<input type="text" name="LIV_Rel" placeholder="Relay de livraison">
-				<input type="submit" value="Envoyer">
+				<div class="form-row separator-row">
+					<h2>Infos gestion</h2>
+				</div>
+				<div class="subform">
+					<div class="form-row">
+						<div class="input-box">
+							<label for="ModeCol">Mode de collecte</label>
+							<input type="text" name="ModeCol" placeholder="Mode de collecte" required required>
+						</div>
+						<div class="input-box">
+							<label for="ModeLiv">Mode de livraison</label>
+							<input type="text" name="ModeLiv" placeholder="Mode de livraison" required required>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-row separator-row">
+					<h2>Expédition de mon colis</h2>
+				</div>
+				<div class="subform">
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Langage_expediteur">Ma langue</label>
+							<input type="text" name="Langage_expediteur" placeholder="Langage de l'expéditeur" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Nom_expediteur">Mon nom</label>
+							<input type="text" name="Nom_expediteur" placeholder="Nom de l'expéditeur" required>
+						</div>
+						<div class="input-box">
+							<label for="Rue_expediteur">Ma rue</label>
+							<input type="text" name="Rue_expediteur" placeholder="Rue de l'expéditeur" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Ville_expediteur">Ma ville</label>
+							<input type="text" name="Ville_expediteur" placeholder="Ville de l'expéditeur" required>
+						</div>
+						<div class="input-box">
+							<label for="Code_postal_expediteur">Mon code postal</label>
+							<input type="number" name="Code_postal_expediteur" placeholder="Code Postal de l'expéditeur" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Pays_expediteur">Mon pays</label>
+							<select name="Pays_expediteur">
+								<option value="" selected disabled>-- Sélectionnez un pays --</option>
+								<option value="FR">France</option>
+								<option value="EN">England</option>
+								<option value="SP">Spain</option>
+								<option value="JP">Japan</option>
+								<option value="GA">Galar</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Telephone_expediteur">Mon téléphone</label>
+							<input type="phone" name="Telephone_expediteur" placeholder="Téléphone de l'expediteur" required>
+						</div>
+						<div class="input-box">
+							<label for="Mail_expediteur">Mon email</label>
+							<input type="email" name="Mail_expediteur" placeholder="Mail de l'expediteur" required>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-row separator-row">
+					<h2>Destinataire de mon colis</h2>
+				</div>
+				<div class="subform">
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Langage_destinataire">Sa langue</label>
+							<input type="text" name="Langage_destinataire" placeholder="Langage du destinataire" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Nom_destinataire">Son nom</label>
+							<input type="text" name="Nom_destinataire" placeholder="Nom du destinataire" required>
+						</div>
+						<div class="input-box">
+							<label for="Rue_destinataire">Sa rue</label>
+							<input type="text" name="Rue_destinataire" placeholder="Rue du destinataire" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Ville_destinataire">Sa ville</label>
+							<input type="text" name="Ville_destinataire" placeholder="Ville du destinataire" required>
+						</div>
+						<div class="input-box">
+							<label for="Code_postal_destinataire">Son code postal</label>
+							<input type="number" name="Code_postal_destinataire" placeholder="Code postal du destinataire" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Pays_destinataire">Son pays</label>
+							<select name="Pays_destinataire">
+								<option value="" selected disabled>-- Sélectionnez un pays --</option>
+								<option value="FR">France</option>
+								<option value="EN">England</option>
+								<option value="SP">Spain</option>
+								<option value="JP">Japan</option>
+								<option value="GA">Galar</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Telephone_destinataire">Son téléphone</label>
+							<input type="phone" name="Telephone_destinataire" placeholder="Téléphone du destinataire" required>
+						</div>
+						<div class="input-box">
+							<label for="Mail_destinataire">Son email</label>
+							<input type="email" name="Mail_destinataire" placeholder="Mail du destinataire" required>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-row separator-row">
+					<h2>Mon colis</p>
+				</div>
+				<div class="subform">
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Poids">Poids</label>
+							<input type="number" name="Poids" placeholder="Poids" required>
+						</div>
+						<div class="input-box">
+							<label for="Nombre_colis">Nombre de colis</label>
+							<input type="number" name="Nombre_colis" placeholder="Nombre de colis" required>
+						</div>
+						<div class="input-box">
+							<label for="Montant_contre_remboursement">Montant contre remboursement</label>
+							<input type="number" name="Montant_contre_remboursement" placeholder="Montant contre remboursement" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="COL_Rel_Pays">Pays du Relay de collecte</label>
+							<input type="text" name="COL_Rel_Pays" placeholder="Entrez le pays du Relais de collecte" required>
+						</div>
+						<div class="input-box">
+							<label for="COL_Rel">Relay de collecte</label>
+							<input type="text" name="COL_Rel" placeholder="Entrez le relais de collecte" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="LIV_Rel_Pays">Pays du Relay de livraison</label>
+							<input type="text" name="LIV_Rel_Pays" placeholder="Entrez le pays du Relais de livraison" required>
+						</div>
+						<div class="input-box">
+							<label for="LIV_Rel">Relay de livraison</label>
+							<input type="text" name="LIV_Rel" placeholder="Entrez le relais de livraison" required>
+						</div>
+					</div>
+				</div>
+				<div class="form-row btns-box">
+					<div class="input-box">
+						<!-- <button id="empty">Effacer les champs</button> -->
+					</div>
+					<div class="input-box">
+						<input type="submit" value="Envoyer" required>
+					</div>
+				</div>
 			</form>
 		</section>
 	</main>
 	<%- include("_footer") %>
 </body>
-<script>
-	const select = document.querySelector("select");
-	select.innerHTML = '';
-	for (let i = 0; i < 30; i++) {
-		select.innerHTML += `
-			<option value="${i}" ${i === 10 ? "selected" : ""}>${i}</option>
-		`;
-	}
-</script>
 <script src="/js/form.js"></script>
+<script src="/js/debug.js"></script>
 </html>
