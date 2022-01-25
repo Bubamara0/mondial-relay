@@ -111,7 +111,7 @@ router.post("/", (req, res) => {
             
 			const tmp = {
 				Numero_expedition : beforeFormating[0].ExpeditionNum[0],
-                URL_Etiquette : `https://mondialrelay.com/${beforeFormating[0].URL_Etiquette[0]}`
+                URL_Etiquette : `https://mondialrelay.com${beforeFormating[0].URL_Etiquette[0]}`
 			};
 
 			res.status(200).send(tmp);
