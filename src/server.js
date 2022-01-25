@@ -21,7 +21,7 @@ const creationEtiquette = require("./creationEtiquette");
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
 --------------------------------------------------------------- */
-app.set("views engine", "ejs");
+app.set("view engine", "ejs");
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
