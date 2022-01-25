@@ -1,3 +1,12 @@
+:root{
+    --navbarHeight : 4.8rem;
+
+    --main-color : #CA0047;
+    --secondary-color : #F55169;
+
+    --white : #fefefe;
+}
+
 *{
     margin: 0;
     padding: 0;

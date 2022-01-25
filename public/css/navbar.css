@@ -1,0 +1,42 @@
+#navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--navbarHeight);
+    background-color: var(--main-color);
+    color: var(--white);
+    animation: navbarAppears 1.2s ease-out;
+}
+
+@keyframes navbarAppears {
+    0%{
+        opacity: 0;
+        top: -100%;
+    }
+    100%{
+        opacity: 1;
+        top: 0;
+    }
+}
+
+#navbar ul {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+#navbar ul li {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+#navbar ul li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}

@@ -10,7 +10,9 @@
 	<link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-	<header></header>
+	<header>
+		<%- include("_navbar") %>
+	</header>
 	<main>
 		<section>
 			<form action="/prsearch" method="POST">
@@ -24,7 +26,9 @@
 			</form>
 		</section>
 	</main>
-	<footer></footer>
+	<footer>
+		<%- include("_footer") %>
+	</footer>
 </body>
 <script>
 	const select = document.querySelector("select");
@@ -35,4 +39,5 @@
 		`;
 	}
 </script>
+<script src="/js/form.js"></script>
 </html>
