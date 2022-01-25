@@ -1,8 +1,18 @@
+:root{
+    --navbarHeight : 4.8rem;
+
+    --main-color : #CE0C4B;
+    --secondary-color : #F55169;
+
+    --white : #fefefe;
+}
+
 *{
     margin: 0;
     padding: 0;
     border-spacing: 0;
     list-style: inherit;
+    text-decoration: inherit;
     color: inherit;
     font-family: "Helvetica", sans-serif;
     font-size: 1.6rem;

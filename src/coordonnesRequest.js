@@ -20,9 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 /* ---------------------------------------------------------------
 # SCRIPT START
 --------------------------------------------------------------- */
-
 router.post("/coordonnees", (req, res) => {
-
 	const schema = Joi.object({
 		Pays: Joi.string().min(2).max(2).required(),
 		Latitude: Joi.string().required(),
@@ -126,7 +124,6 @@ router.post("/coordonnees", (req, res) => {
 		});
 	};
 	requestXML();
-
-})
+});
 
 module.exports = router;
