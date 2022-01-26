@@ -62,26 +62,6 @@ form .form-row select {
 	border: solid 1px var(--light-gray);
 }
 
-@media screen and (max-width: 800px) {
-	form .form-row{
-		display: flex;
-		flex-flow: column nowrap;
-	}
-	form .form-row .input-box{
-		margin: 0 auto;
-	}
-	form .input-box > * {
-		margin: 0 auto;
-	}
-	form .form-row .select-label,
-	form .form-row select {
-		width: calc(100% - 25.6px);
-	}
-	form .form-row select:first-child {
-		content: "Test";
-	}
-}
-
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
 	-webkit-appearance: none;
@@ -95,21 +75,21 @@ input[type=number]::-webkit-outer-spin-button {
 	flex-basis: 50%;
 }
 
-form button{
+#fill{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: .8rem;
 	background-color: inherit;
-	color: var(--light-gray);
-	border: solid 1px var(--light-gray);
+	color: #fefefe00;
+	border: solid 1px #fefefe00;
 	border-radius: .2rem;
 	cursor: pointer;
 	transition: background-color .4s ease-out, color .4s ease-out;
 }
-form button:hover{
-	color: var(--white);
-	background-color: var(--medium-gray);
+#fill:hover{
+	color: var(--light-gray);
+	border: solid 1px var(--light-gray);
 }
 
 form input[type="submit"]{
@@ -126,4 +106,27 @@ form input[type="submit"]{
 }
 form input[type="submit"]:hover{
 	background-color: var(--secondary-color);
+}
+
+@media screen and (max-width: 800px) {
+	form .form-row{
+		display: flex;
+		flex-flow: column nowrap;
+	}
+	form .form-row .input-box{
+		margin: 0 auto;
+	}
+	form .input-box > * {
+		margin: 0 auto;
+	}
+	form .form-row .select-label{
+		margin-left: .8rem;
+	}
+	form .form-row .select-label,
+	form .form-row select {
+		width: calc(100% - 25.6px);
+	}
+	.btns-box .input-box{
+		flex-basis: inherit;
+	}
 }
