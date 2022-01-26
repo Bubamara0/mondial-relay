@@ -28,7 +28,7 @@
 	position: absolute;
 	top: calc(var(--navbarHeight) / 8);
 	left: calc(var(--navbarHeight) / 2);
-	background-image: url("/img/logo.png");
+	background-image: url("../img/logo.png");
 	background-position: center;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -97,7 +97,7 @@
 		height: 100%;
 		width: var(--navbarHeight);
 		background-color: var(--main-color);
-		background-image: url("/img/burger.svg");
+		background-image: url("../img/burger.svg");
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -137,7 +137,7 @@
 			height: 100%;
 			width: var(--navbarHeight);
 			background-color: var(--main-color);
-			background-image: url("/img/cross.svg");
+			background-image: url("../img/cross.svg");
 			background-position: center;
 			background-size: cover;
 			background-repeat: no-repeat;
