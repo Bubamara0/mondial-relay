@@ -10,7 +10,8 @@ const md5 = require("md5");
 const { response } = require("express");
 const xml2js = require("xml2js");
 const router = express.Router();
-
+const path = require("path");
+const { nextTick } = require("process");
 
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
@@ -120,8 +121,9 @@ router.post("/", (req, res) => {
         URL_Etiquette : `https://mondialrelay.com${beforeFormating[0].URL_Etiquette[0]}`
 			};
 
-			res.status(200).sendFile(tmp.URL_Etiquette);
-		});
+			// res.status(200).send(tmp.URL_Etiquette)
+      res.render("results", {url: tmp.URL_Etiquette});
+      })
 	};
 	requestXML();
 })

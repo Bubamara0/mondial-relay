@@ -7,7 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Lien de l'étiquette : "https://mondialrelay.com${beforeFormating[0].URL_Etiquette[0]"</a></p>
+    <a id="dl" style="display:none" href="<%= url %>" download>Lien de l'étiquette</a>
+    <p>Merci d'avoir utilisé Mondial Relais !</p>
+    <p>Si le téléchargement de votre étiquette ne se lance pas, cliquez <a href="<%= url %>">ici</a></p>
 </body>
-<script src="creationEtiquette.js"></script>
+
+<script type="module" src="creationEtiquette.js"></script>
+<script>
+
+const downloadFile = () => {
+    document.getElementById('dl').click();
+}
+downloadFile();
+
+</script>
 </html>
