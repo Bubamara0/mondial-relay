@@ -61,6 +61,27 @@ form .form-row select {
 	background: var(--white);
 	border: solid 1px var(--light-gray);
 }
+
+@media screen and (max-width: 800px) {
+	form .form-row{
+		display: flex;
+		flex-flow: column nowrap;
+	}
+	form .form-row .input-box{
+		margin: 0 auto;
+	}
+	form .input-box > * {
+		margin: 0 auto;
+	}
+	form .form-row .select-label,
+	form .form-row select {
+		width: calc(100% - 25.6px);
+	}
+	form .form-row select:first-child {
+		content: "Test";
+	}
+}
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
 	-webkit-appearance: none;
