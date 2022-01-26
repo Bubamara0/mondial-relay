@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/server.js",
-    "s": "node src/server.js"
+    "start": "concurrently --raw \"npm run front\" \"npm run back\"",
+    "front": "nodemon frontend/client.js",
+    "back": "nodemon backend/src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +14,7 @@
   "dependencies": {
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
+    "concurrently": "^7.0.0",
     "crypto-js": "^4.1.1",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",

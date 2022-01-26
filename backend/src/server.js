@@ -23,10 +23,9 @@ const creationEtiquette = require("./creationEtiquette");
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
 --------------------------------------------------------------- */
-app.set("view engine", "ejs");
+// app.set("view engine", "ejs");
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
 app.use(morgan('combined'));
 
 /* ---------------------------------------------------------------
@@ -41,4 +40,4 @@ app.get("/", (req, res) => res.render("index"));
 # SERVER LAUNCHING
 --------------------------------------------------------------- */
 const PORT = process.env.port || 8080;
-app.listen(PORT, () => console.log(`Server started on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Back-end server started on http://localhost:${PORT}`));
