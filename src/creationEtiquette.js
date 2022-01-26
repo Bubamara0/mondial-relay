@@ -10,7 +10,8 @@ const md5 = require("md5");
 const { response } = require("express");
 const xml2js = require("xml2js");
 const router = express.Router();
-
+const path = require("path");
+const { nextTick } = require("process");
 
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
@@ -53,7 +54,7 @@ router.post("/", (req, res) => {
 	});
 
 	const { error } = schema.validate(req.body);
-	if (error) res.status(400).send(`Bad Request!\n${error.details[0].message}`);
+	if (error) return res.status(400).send(`Bad Request!\n${error.details[0].message}`);
 
 	const security = md5("BDTEST13" + req.body.ModeCol + req.body.ModeLiv + req.body.Langage_expediteur + req.body.Nom_expediteur + req.body.Rue_expediteur + req.body.Ville_expediteur + req.body.Code_postal_expediteur + req.body.Pays_expediteur + req.body.Telephone_expediteur + req.body.Mail_expediteur + req.body.Langage_destinataire + req.body.Nom_destinataire + req.body.Rue_destinataire + req.body.Ville_destinataire + req.body.Code_postal_destinataire + req.body.Pays_destinataire + req.body.Telephone_destinataire + req.body.Mail_destinataire + req.body.Poids + req.body.Nombre_colis + req.body.Montant_contre_remboursement + req.body.COL_Rel_Pays + req.body.COL_Rel + req.body.LIV_Rel_Pays + req.body.LIV_Rel + "PrivateK").toUpperCase();
 	console.log(security);
@@ -117,11 +118,12 @@ router.post("/", (req, res) => {
             
 			const tmp = {
 				Numero_expedition : beforeFormating[0].ExpeditionNum[0],
-                URL_Etiquette : `https://mondialrelay.com${beforeFormating[0].URL_Etiquette[0]}`
+        URL_Etiquette : `https://mondialrelay.com${beforeFormating[0].URL_Etiquette[0]}`
 			};
 
-			res.status(200).send(tmp);
-		});
+			// res.status(200).send(tmp.URL_Etiquette)
+      res.render("results", {url: tmp.URL_Etiquette});
+      })
 	};
 	requestXML();
 })

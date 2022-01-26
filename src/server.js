@@ -32,11 +32,10 @@ app.use(morgan('combined'));
 /* ---------------------------------------------------------------
 # ROUTES SETTINGS
 --------------------------------------------------------------- */
-app.get("/", (req, res) => res.render("index"));
-
 app.use("/prsearch", cpRequest, villeRequest, villeCpRequest, coordonneesRequest);
 
 app.use("/creationEtiquette", creationEtiquette);
+app.get("/", (req, res) => res.render("index"));
 
 /* ---------------------------------------------------------------
 # SERVER LAUNCHING
