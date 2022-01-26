@@ -39,3 +39,14 @@ footer .footer-content{
     color: var(--light-gray);
     padding: .8rem 0;
 }
+
+@media screen and (max-width: 800px){
+    footer .footer-content{
+        flex-flow: column nowrap;
+        align-items: center;
+    }
+    footer .footer-content ul{
+        align-items: center;
+        margin: 1.6rem 0;
+    }
+}

@@ -18,7 +18,6 @@
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/footer.css">
 </head>
-
 <body>
 	<header>
 		<!-- <%- include("_navbar") %> -->
@@ -63,20 +62,19 @@
 							<input type="text" name="Rue_expediteur" placeholder="Rue de l'expéditeur" required>
 						</div>
 					</div>
-
 					<div class="form-row">
 						<div class="input-box">
 							<label for="Ville_expediteur">Ma ville</label>
-							<input type="text" name="Ville_expediteur" placeholder="Ville de l'expéditeur" required>
+							<input type="text" name="Ville_expediteur" placeholder="Dinard" required>
 						</div>
 						<div class="input-box">
 							<label for="Code_postal_expediteur">Mon code postal</label>
-							<input type="number" name="Code_postal_expediteur" placeholder="Code Postal de l'expéditeur" required>
+							<input type="number" name="Code_postal_expediteur" placeholder="35800" required>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="input-box">
-							<label class="select-label" for="Pays_expediteur">Mon pays</label>
+							<label class="select-label" for="Pays_expéditeur">Mon pays</label>
 							<select name="Pays_expediteur">
 								<option value="" selected disabled>-- Sélectionnez un pays --</option>
 								<option value="FR">France</option>
@@ -90,11 +88,11 @@
 					<div class="form-row">
 						<div class="input-box">
 							<label for="Telephone_expediteur">Mon téléphone</label>
-							<input type="phone" name="Telephone_expediteur" placeholder="Téléphone de l'expediteur" required>
+							<input type="tel" name="Telephone_expediteur" placeholder="Téléphone de l'expéditeur" required>
 						</div>
 						<div class="input-box">
 							<label for="Mail_expediteur">Mon email</label>
-							<input type="email" name="Mail_expediteur" placeholder="Mail de l'expediteur" required>
+							<input type="email" name="Mail_expediteur" placeholder="Mail de l'expéditeur" required>
 						</div>
 					</div>
 				</div>
@@ -145,7 +143,7 @@
 					<div class="form-row">
 						<div class="input-box">
 							<label for="Telephone_destinataire">Son téléphone</label>
-							<input type="phone" name="Telephone_destinataire" placeholder="Téléphone du destinataire" required>
+							<input type="tel" name="Telephone_destinataire" placeholder="Téléphone du destinataire" required>
 						</div>
 						<div class="input-box">
 							<label for="Mail_destinataire">Son email</label>
@@ -195,7 +193,7 @@
 				</div>
 				<div class="form-row btns-box">
 					<div class="input-box">
-						<!-- <button id="empty">Effacer les champs</button> -->
+						<!-- <span id="fill">Mode flemme</span> -->
 					</div>
 					<div class="input-box">
 						<input type="submit" value="Envoyer" required>
