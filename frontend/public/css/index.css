@@ -18,6 +18,17 @@ body{
 	font-family: "quicksand", serif;
 }
 
+#form-container p{
+	text-align: center;
+	font-family: "quicksand", serif;
+}
+
+.container{
+	width: 50vw;
+	margin-left: 50%;
+	transform: translate(-50%);
+}
+
 form{
 	display: flex;
 	flex-flow: column nowrap;
@@ -128,5 +139,8 @@ form input[type="submit"]:hover{
 	}
 	.btns-box .input-box{
 		flex-basis: inherit;
+	}
+	.container{
+		width: 90vw;
 	}
 }
