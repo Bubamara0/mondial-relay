@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const { response, Router } = require("express");
 require("dotenv").config();
 const morgan = require("morgan");
+const cors = require("cors");
 
 /* ---------------------------------------------------------------
 # EXTERNAL SCRIPTS IMPORTS
@@ -17,24 +18,21 @@ const cpRequest = require("./cpRequest");
 const villeRequest = require("./villeRequest");
 const villeCpRequest = require("./villeCpRequest");
 const coordonneesRequest = require("./coordonnesRequest");
-
 const creationEtiquette = require("./creationEtiquette");
 
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
 --------------------------------------------------------------- */
-// app.set("view engine", "ejs");
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('combined'));
+app.use(cors());
 
 /* ---------------------------------------------------------------
 # ROUTES SETTINGS
 --------------------------------------------------------------- */
 app.use("/prsearch", cpRequest, villeRequest, villeCpRequest, coordonneesRequest);
-
 app.use("/creationEtiquette", creationEtiquette);
-app.get("/", (req, res) => res.render("index"));
 
 /* ---------------------------------------------------------------
 # SERVER LAUNCHING

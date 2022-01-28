@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently --raw \"npm run front\" \"npm run back\"",
-    "front": "nodemon frontend/client.js",
-    "back": "nodemon backend/src/server.js"
+    "front": "cd frontend && npm start",
+    "back": "cd backend && npm start",
+    "iall" : "concurrently --raw \"npm i\" \"cd frontend && npm i\" \"cd backend && npm i\""
   },
   "keywords": [],
   "author": "",
