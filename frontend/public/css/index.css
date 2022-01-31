@@ -135,7 +135,4 @@ form input[type="submit"]:hover{
 	.btns-box .input-box{
 		flex-basis: inherit;
 	}
-	.container{
-		width: 90vw;
-	}
 }
