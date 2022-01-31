@@ -13,7 +13,6 @@ const cors = require("cors");
 /* ---------------------------------------------------------------
 # EXTERNAL SCRIPTS IMPORTS
 --------------------------------------------------------------- */
-
 const cpRequest = require("./cpRequest");
 const villeRequest = require("./villeRequest");
 const villeCpRequest = require("./villeCpRequest");
