@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light-theme">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +13,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 
 	<!-- CSS -->
+	<link type="text/css" rel="stylesheet" href="./css/themes.css">
 	<link type="text/css" rel="stylesheet" href="./css/styles.css">
 	<link type="text/css" rel="stylesheet" href="./css/navbar.css">
 	<link type="text/css" rel="stylesheet" href="./css/index.css">
@@ -27,6 +28,7 @@
 				<li><a href="./about.html">À propos</a></li>
 				<li><a href="./contact.html">Contact</a></li>
 			</ul>
+			<div class="theme-changer"></div>
 			<div class="burger"></div>
 		</nav>
 		<nav id="overlay">
@@ -38,7 +40,7 @@
 				<li><a href="./about.html">About</a></li>
 				<li><a href="./contact.html">Contact</a></li>
 			</ul>
-		</nav>	
+		</nav>
 	</header>
 	<main>
 		<section id="form-container">
@@ -249,4 +251,5 @@
 </body>
 <script src="./js/fillForm.js"></script>
 <script src="./js/burger.js"></script>
+<script type="module" src="./js/theme.js"></script>
 </html>

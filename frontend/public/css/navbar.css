@@ -71,6 +71,21 @@
 #navbar > ul li a:hover{
 	background-color: var(--secondary-color);
 }
+#navbar > .theme-changer{
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: var(--navbarHeight);
+	width: var(--navbarHeight);
+	background-image: url("../img/theme-dark.webp");
+	background-position: contain;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+#navbar > .theme-changer:hover{
+	background-color: var(--secondary-color);
+}
 #navbar .burger{display: none;}
 #overlay {
 	display: none;
@@ -92,6 +107,9 @@
 	#navbar > ul,
 	#navbar > ul * {
 		display: none;
+	}
+	#navbar > .theme-changer{
+		right: var(--navbarHeight);
 	}
 	#navbar .burger{
 		display: flex;

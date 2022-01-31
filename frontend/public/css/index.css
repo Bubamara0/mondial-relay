@@ -1,5 +1,6 @@
 body{
 	padding-top:  calc(var(--navbarHeight) * 2);
+	background-color: var(--white);
 }
 #form-container{
 	display: flex;
@@ -33,21 +34,21 @@ form{
 	display: flex;
 	flex-flow: column nowrap;
 	padding: .8rem;
-	background-color: #fefefe;
+	background-color: var(--white);
 }
 
 form .subform{
-	background-color: #eef0f3;
+	background-color: var(--broken-white);
 	padding: .8rem;
 	border-radius: .2rem;
-	border: solid 1px #d5dee5;
+	border: solid 1px var(--light-gray);
 }
 
 .separator-row{
 	margin : 2.4rem 0;
 	padding: .8rem;
 	color: var(--medium-gray);
-	border-bottom: solid 1px #d4dee5;
+	border-bottom: solid 1px var(--light-gray);
 }
 
 form .form-row{
