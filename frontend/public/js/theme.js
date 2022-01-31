@@ -13,7 +13,6 @@ const revertThemes = () => {
 		document.documentElement.classList.replace("theme-light", "theme-dark");
 		themeButton.style.backgroundImage = `url(${lightIcon.replaceAll(window.location.origin + "/", "")})`;
 		logo.style.backgroundImage = `url(${darkLogo.replaceAll(window.location.origin + "/", "")})`;
-
 	} else {
 		document.documentElement.classList.replace("theme-dark", "theme-light");
 		themeButton.style.backgroundImage = `url(${darkIcon.replaceAll(window.location.origin + "/", "")})`;
@@ -30,7 +29,7 @@ const setTheme = (themeName) => {
 }
 // function to toggle between light and dark theme
 const toggleTheme = () => {
- if (localStorage.getItem('theme') === 'theme-dark') setTheme('theme-light')
+	if (localStorage.getItem('theme') === 'theme-dark') setTheme('theme-light')
 	else setTheme('theme-dark')
 }
 

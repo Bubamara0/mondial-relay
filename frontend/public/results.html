@@ -1,12 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light-theme">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mondial Relais - Le relais de Mondial Relay</title>
+	<link rel="icon" href="./img/logo.png">
+
+	<!-- IMPORTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="./css/themes.css">
+	<link rel="stylesheet" href="./css/styles.css">
+	<link rel="stylesheet" href="./css/navbar.css">
+	<link rel="stylesheet" href="./css/results.css">
+	<link rel="stylesheet" href="./css/footer.css">
 </head>
 <body>
+	<header>
+		<nav id="navbar">
+			<a class="logo" href="/"></a>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li><a href="./about.html">À propos</a></li>
+				<li><a href="./contact.html">Contact</a></li>
+			</ul>
+			<div class="burger"></div>
+		</nav>
+		<nav id="overlay">
+			<div>
+				<div class="cross"></div>
+			</div>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li><a href="./about.html">About</a></li>
+				<li><a href="./contact.html">Contact</a></li>
+			</ul>
+		</nav>	
+	</header>
 	<a id="dl" style="display:none" href="<%= url %>" download>Lien de l'étiquette</a>
 	<p>Merci d'avoir utilisé Mondial Relais !</p>
 	<p>Si le téléchargement de votre étiquette ne se lance pas, cliquez <a href="<%= url %>">ici</a></p>
@@ -14,11 +48,7 @@
 
 <script type="module" src="creationEtiquette.js"></script>
 <script>
-
-const downloadFile = () => {
-	document.getElementById('dl').click();
-}
-downloadFile();
-
+	const downloadFile = () => document.getElementById('dl').click();
+	downloadFile();
 </script>
 </html>

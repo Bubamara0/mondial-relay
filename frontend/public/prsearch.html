@@ -1,45 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-light">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mondial Relais - Le relais de Mondial Relay</title>
+	<link rel="icon" href="./img/logo.png">
+
+	<!-- IMPORTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css'>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="./css/themes.css">
+	<link rel="stylesheet" href="./css/styles.css">
+	<link rel="stylesheet" href="./css/navbar.css">
+	<link rel="stylesheet" href="./css/prsearch.css">
+	<link rel="stylesheet" href="./css/footer.css">
 </head>
 <body>
-	<header></header>
-	<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
-	<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
-
-
+	<header>
+		<nav id="navbar">
+			<a class="logo" href="/"></a>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li><a href="./prsearch.html">Rechercher point relais</a></li>
+				<li><a href="./about.html">À propos</a></li>
+				<li><a href="./contact.html">Contact</a></li>
+			</ul>
+			<div class="theme-changer"></div>
+			<div class="burger"></div>
+		</nav>
+		<nav id="overlay">
+			<div>
+				<div class="cross"></div>
+			</div>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li><a href="./prsearch.html">Rechercher point relais</a></li>
+				<li><a href="./about.html">À propos</a></li>
+				<li><a href="./contact.html">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
 	<main>
-		<h1>Recherche de Point Relais</h1>
-		<form method="post">
-			<input type="text" name="Pays" placeholder="Pays" required required>
-			<input type="text" name="Ville" placeholder="Ville" required required>
-			<input type="text" name="CP" placeholder="Code Postal" required required>
-			<input type="text" name="NombreResultats" placeholder="Nombre de résultats" required required>
-			
-			<input type="submit" value="Rechercher le Point Relais" required>
-		</form>
+		<section id="form-container">
+			<h1>Création étiquette</h1>
+			<form action="/creationEtiquette" method="POST">
+				<div class="form-row separator-row">
+					<h2>Infos gestion</h2>
+				</div>
+				<div class="subform">
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Pays">Pays</label>
+							<input type="text" name="Pays" placeholder="ex: FR" required>
+						</div>
+						<div class="input-box">
+							<label for="Ville">Ville</label>
+							<input type="text" name="Ville" placeholder="ex: Dinard" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="CP">Code postal</label>
+							<input type="text" name="CP" placeholder="ex: 35800" max-length="5" required>
+						</div>
+						<div class="input-box">
+							<label for="NombreResultats">Nombre de résultats</label>
+							<input type="text" name="NombreResultats" placeholder="ex: 30" min="1" max="30" required>
+						</div>
+					</div>
+				</div>
+			</form>
+		</section>
+		<section id="form-container">
+			<h1>Recherche de Point Relais</h1>
+			<form method="POST">
+				<div class="form-row">
+					
+				</div>
+				
+				
+				
+				
+				<input type="submit" value="Rechercher le Point Relais" required>
+			</form>
+		</section>
+		<section id='map' style='width: 80px; height: 60px;'></section>
 	</main>
-
-	<div id='map' style='width: 400px; height: 300px;'></div>
-
-	<script>
-		mapboxgl.accessToken = 'pk.eyJ1IjoicmljaGFyZGRhc3NhdXQiLCJhIjoiY2t6MmZrMHpvMGkxYTJvbXY1c3psYjhmYSJ9.f3SH9sWBhFpEg7hCo9VeNA';
-
-		const map = new mapboxgl.Map({
-			container: 'map', // container ID
-			style: 'mapbox://styles/mapbox/streets-v11', // style URL
-			center: [-2.05492, 48.6315], // starting position [lng, lat]
-			zoom: 5 // starting zoom
-		});
-
-		const marker = new mapboxgl.Marker().setLngLat([-2.05492, 48.6315]).addTo(map);
-	</script>
-
-	<script type="module" src="./js/markerRequest.js"></script>
 	<footer></footer>
+	<script>
+		
+	</script>
+	<script type="module" src="./js/markerRequest.js"></script>
+	<script type="module" src="./js/burger.js"></script>
+	<script type="module" src="./js/theme.js"></script>
 </body>
 </html>

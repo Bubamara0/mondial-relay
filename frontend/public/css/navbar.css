@@ -11,7 +11,7 @@
 	color: var(--white);
 	box-shadow: #29292933 1px 1px 8px;
 	z-index: 999;
-	animation: navbarAppears 1s ease-out;
+	/* animation: navbarAppears 1s ease-out; */
 }
 
 @keyframes navbarAppears {
