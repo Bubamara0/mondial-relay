@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel public/index.html"
+    "start": "parcel public/index.html",
+    "dev": "parcel public/prsearch.html"
   },
   "keywords": [],
   "author": "",

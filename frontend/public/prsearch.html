@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<header></header>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+
+
+	<main>
+		<h1>Recherche de Point Relais</h1>
+		<form method="post">
+			<input type="text" name="Pays" placeholder="Pays" required required>
+			<input type="text" name="Ville" placeholder="Ville" required required>
+			<input type="text" name="CP" placeholder="Code Postal" required required>
+			<input type="text" name="NombreResultats" placeholder="Nombre de résultats" required required>
+			
+			<input type="submit" value="Rechercher le Point Relais" required>
+		</form>
+	</main>
+
+	<div id='map' style='width: 400px; height: 300px;'></div>
+
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoicmljaGFyZGRhc3NhdXQiLCJhIjoiY2t6MmZrMHpvMGkxYTJvbXY1c3psYjhmYSJ9.f3SH9sWBhFpEg7hCo9VeNA';
+
+		const map = new mapboxgl.Map({
+			container: 'map', // container ID
+			style: 'mapbox://styles/mapbox/streets-v11', // style URL
+			center: [-2.05492, 48.6315], // starting position [lng, lat]
+			zoom: 5 // starting zoom
+		});
+
+		const marker = new mapboxgl.Marker().setLngLat([-2.05492, 48.6315]).addTo(map);
+	</script>
+
+	<script type="module" src="./js/markerRequest.js"></script>
+	<footer></footer>
+</body>
+</html>

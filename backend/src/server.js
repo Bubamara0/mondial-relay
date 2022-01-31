@@ -13,11 +13,13 @@ const cors = require("cors");
 /* ---------------------------------------------------------------
 # EXTERNAL SCRIPTS IMPORTS
 --------------------------------------------------------------- */
+
 const cpRequest = require("./cpRequest");
 const villeRequest = require("./villeRequest");
 const villeCpRequest = require("./villeCpRequest");
 const coordonneesRequest = require("./coordonnesRequest");
 const creationEtiquette = require("./creationEtiquette");
+const villeCpRequestWeb = require("./villeCpRequestWeb");
 
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
@@ -30,11 +32,11 @@ app.use(cors());
 /* ---------------------------------------------------------------
 # ROUTES SETTINGS
 --------------------------------------------------------------- */
-app.use("/prsearch", cpRequest, villeRequest, villeCpRequest, coordonneesRequest);
+app.use("/prsearch", cpRequest, villeRequest, villeCpRequest, coordonneesRequest, villeCpRequestWeb);
 app.use("/creationEtiquette", creationEtiquette);
 
 /* ---------------------------------------------------------------
 # SERVER LAUNCHING
 --------------------------------------------------------------- */
 const PORT = process.env.port || 8080;
-app.listen(PORT, () => console.log(`Back-end server started on http://localhost:${PORT}`));
+app.listen(PORT, ()=> console.log(`Server listening on port : ${PORT}`));

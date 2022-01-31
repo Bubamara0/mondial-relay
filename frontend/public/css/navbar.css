@@ -116,7 +116,7 @@
 		height: 100%;
 		width: var(--navbarHeight);
 		background-color: var(--main-color);
-		background-image: url("../img/burger.svg");
+		background-image: url("../img/burger.png");
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -151,19 +151,19 @@
 			width: 100%;
 			height: var(--navbarHeight);
 		}
-		#overlay > div .cross{
+		#overlay .cross{
 			display: flex;
 			height: 100%;
 			width: var(--navbarHeight);
 			background-color: var(--main-color);
-			background-image: url("../img/cross.svg");
+			background-image: url("../img/cross.png");
 			background-position: center;
 			background-size: cover;
 			background-repeat: no-repeat;
 			cursor: pointer;
 			transition: background-color .4s ease-out;
 		}
-		#overlay > div .cross:hover{
+		#overlay .cross:hover{
 			background-color: var(--secondary-color);
 		}
 		#overlay > ul {
