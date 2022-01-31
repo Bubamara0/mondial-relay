@@ -51,15 +51,22 @@
 				<div class="form-row separator-row">
 					<h2>Infos gestion</h2>
 				</div>
+
 				<div class="subform">
 					<div class="form-row">
 						<div class="input-box">
 							<label for="ModeCol">Mode de collecte</label>
-							<input type="text" name="ModeCol" placeholder="Mode de collecte" required required>
+							<select name="ModeCol">
+								<option value="">-- Sélectionnez un mode de collecte --</option>
+								<option value="CCC">CCC</option>
+							</select>
 						</div>
 						<div class="input-box">
 							<label for="ModeLiv">Mode de livraison</label>
-							<input type="text" name="ModeLiv" placeholder="Mode de livraison" required required>
+							<select name="ModeLiv">
+								<option value="">-- Sélectionnez un mode de livraison --</option>
+								<option value="24H">24H</option>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -67,17 +74,30 @@
 				<div class="form-row separator-row">
 					<h2>Expédition de mon colis</h2>
 				</div>
+
 				<div class="subform">
 					<div class="form-row">
 						<div class="input-box">
 							<label for="Langage_expediteur">Ma langue</label>
-							<input type="text" name="Langage_expediteur" placeholder="Langage de l'expéditeur" required>
+							<select name="Langage_expediteur">
+								<option value="" selected disabled>-- Sélectionnez une langue --</option>
+								<option value="FR">Français</option>
+								<option value="EN">Anglais</option>
+								<option value="SP">Espagnol</option>
+								<option value="JP">Japonais</option>
+								<option value="GA">Futhark</option>
+							</select>
 						</div>
 					</div>
-					<div class="form-row">
-						<div class="input-box">
-							<label for="Civilite_expediteur">Mon nom</label>
-							<input type="radio" name="Civilite_expediteur" value="" required>
+					<div class="form-column">
+						<label for="Civilite_expediteur">Ma civilité</label>
+						<div class="radio-box">
+							<input type="radio" id="MR" name="Civilite_expediteur" value="M" required checked>
+							<label for="MR">Monsieur</label>
+						</div>
+						<div class="radio-box">
+							<input type="radio" id="MME" name="Civilite_expediteur" value="MME" required>
+							<label for="MME">Madame</label>
 						</div>
 					</div>
 					<div class="form-row">
@@ -87,7 +107,7 @@
 						</div>
 						<div class="input-box">
 							<label for="Prenom_expediteur">Mon Prénom</label>
-							<input type="text" name="Nom_expediteur" placeholder="ex: John" required>
+							<input type="text" name="Prenom_expediteur" placeholder="ex: John" required>
 						</div>
 					</div>
 					<div class="form-row">
@@ -107,7 +127,7 @@
 						</div>
 						<div class="input-box">
 							<label for="Code_postal_expediteur">Mon code postal</label>
-							<input type="number" name="Code_postal_expediteur" placeholder="35800" required>
+							<input type="number" name="Code_postal_expediteur" placeholder="ex: 35800" required>
 						</div>
 					</div>
 					<div class="form-row">
@@ -126,11 +146,11 @@
 					<div class="form-row">
 						<div class="input-box">
 							<label for="Telephone_expediteur">Mon téléphone</label>
-							<input type="tel" name="Telephone_expediteur" placeholder="Téléphone de l'expéditeur" required>
+							<input type="tel" name="Telephone_expediteur" placeholder="ex: 0123456789" required>
 						</div>
 						<div class="input-box">
 							<label for="Mail_expediteur">Mon email</label>
-							<input type="email" name="Mail_expediteur" placeholder="Mail de l'expéditeur" required>
+							<input type="email" name="Mail_expediteur" placeholder="ex: johndoe@gmail.com" required>
 						</div>
 					</div>
 				</div>
@@ -138,23 +158,55 @@
 				<div class="form-row separator-row">
 					<h2>Destinataire de mon colis</h2>
 				</div>
+
 				<div class="subform">
 					<div class="form-row">
 						<div class="input-box">
 							<label for="Langage_destinataire">Sa langue</label>
-							<input type="text" name="Langage_destinataire" placeholder="Langage du destinataire" required>
+							<select name="Langage_destinataire">
+								<option value="" selected disabled>-- Sélectionnez une langue --</option>
+								<option value="FR">Français</option>
+								<option value="EN">Anglais</option>
+								<option value="SP">Espagnol</option>
+								<option value="JP">Japonais</option>
+								<option value="GA">Futhark</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-column">
+						<label for="Civilite_destinataire">Sa civilité</label>
+						<div class="radio-box">
+							<input type="radio" id="MR_dest" name="Civilite_destinataire" value="M" required checked>
+							<label for="MR_dest">Monsieur</label>
+						</div>
+						<div class="radio-box">
+							<input type="radio" id="MME_dest" name="Civilite_destinataire" value="MME" required>
+							<label for="MME_dest">Madame</label>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="input-box">
 							<label for="Nom_destinataire">Son nom</label>
-							<input type="text" name="Nom_destinataire" placeholder="Nom du destinataire" required>
+							<input type="text" name="Nom_destinataire" placeholder="ex: Doe" required>
+						</div>
+						<div class="input-box">
+							<label for="Prenom_destinataire">Son nom</label>
+							<input type="text" name="Prenom_destinataire" placeholder="ex: John" required>
+						</div>
+						
+					</div>
+
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Numero_Rue_destinataire">Son numéro de rue</label>
+							<input type="text" name="Numero_Rue_destinataire" placeholder="ex: 7" required>
 						</div>
 						<div class="input-box">
 							<label for="Rue_destinataire">Sa rue</label>
-							<input type="text" name="Rue_destinataire" placeholder="Rue du destinataire" required>
+							<input type="text" name="Rue_destinataire" placeholder="ex: Rue des paquerettes" required>
 						</div>
 					</div>
+
 					<div class="form-row">
 						<div class="input-box">
 							<label for="Ville_destinataire">Sa ville</label>
@@ -193,6 +245,7 @@
 				<div class="form-row separator-row">
 					<h2>Mon colis</p>
 				</div>
+
 				<div class="subform">
 					<div class="form-row">
 						<div class="input-box">
@@ -211,7 +264,14 @@
 					<div class="form-row">
 						<div class="input-box">
 							<label for="COL_Rel_Pays">Pays du Relay de collecte</label>
-							<input type="text" name="COL_Rel_Pays" placeholder="Entrez le pays du Relais de collecte" required>
+							<select name="COL_Rel_Pays">
+								<option value="" selected disabled>-- Sélectionnez un pays --</option>
+								<option value="FR">France</option>
+								<option value="EN">England</option>
+								<option value="SP">Spain</option>
+								<option value="JP">Japan</option>
+								<option value="GA">Galar</option>
+							</select>
 						</div>
 						<div class="input-box">
 							<label for="COL_Rel">Relay de collecte</label>
@@ -221,7 +281,14 @@
 					<div class="form-row">
 						<div class="input-box">
 							<label for="LIV_Rel_Pays">Pays du Relay de livraison</label>
-							<input type="text" name="LIV_Rel_Pays" placeholder="Entrez le pays du Relais de livraison" required>
+							<select name="LIV_Rel_Pays">
+								<option value="" selected disabled>-- Sélectionnez un pays --</option>
+								<option value="FR">France</option>
+								<option value="EN">England</option>
+								<option value="SP">Spain</option>
+								<option value="JP">Japan</option>
+								<option value="GA">Galar</option>
+							</select>
 						</div>
 						<div class="input-box">
 							<label for="LIV_Rel">Relay de livraison</label>
@@ -231,7 +298,7 @@
 				</div>
 				<div class="form-row btns-box">
 					<div class="input-box">
-						<!-- <span id="fill">Mode flemme</span> -->
+						<!-- BLANK AREA -->
 					</div>
 					<div class="input-box">
 						<input type="submit" value="Envoyer" required>

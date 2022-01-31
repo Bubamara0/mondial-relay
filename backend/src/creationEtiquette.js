@@ -22,30 +22,48 @@ app.use(bodyParser.urlencoded({extended: true}));
 /* ---------------------------------------------------------------
 # SCRIPT START
 --------------------------------------------------------------- */
-
 router.post("/", (req, res) => {
 	const schema = Joi.object({
 		ModeCol : Joi.string().max(3).min(3).required(),
 		ModeLiv : Joi.string().max(3).min(3).required(),
+
+		// --- EXPEDITEUR
 		Langage_expediteur : Joi.string().max(2).min(2).required(),
+
+		Civilite_expediteur : Joi.string().max(4).required(),
 		Nom_expediteur : Joi.string().max(32).required(),
+		Prenom_expediteur : Joi.string().max(32).required(),
+
+		Numero_Rue_expediteur : Joi.string().max(32).required(),
 		Rue_expediteur : Joi.string().max(32).required(),
+
 		Ville_expediteur : Joi.string().max(26).required(),
 		Code_postal_expediteur : Joi.string().required(),
 		Pays_expediteur : Joi.string().max(2).min(2).required(),
 		Telephone_expediteur : Joi.string().required(),
 		Mail_expediteur : Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'fr'] } }).required(),
+
+		// --- DESTINATAIRE
 		Langage_destinataire : Joi.string().max(2).min(2).required(),
+
+		Civilite_destinataire : Joi.string().max(4).required(),
 		Nom_destinataire : Joi.string().max(32).required(),
+		Prenom_destinataire : Joi.string().max(32).required(),
+
+		Numero_Rue_destinataire : Joi.string().max(32).required(),
 		Rue_destinataire : Joi.string().max(32).required(),
+
 		Ville_destinataire : Joi.string().max(26).required(),
 		Code_postal_destinataire : Joi.string().required(),
 		Pays_destinataire : Joi.string().max(2).min(2).required(),
 		Telephone_destinataire : Joi.string().required(),
 		Mail_destinataire : Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'fr'] } }).required(),
+
+		// --- COLIS
 		Poids : Joi.string().min(1).max(7).required(),
 		Nombre_colis : Joi.string().min(1).max(2).required(),
 		Montant_contre_remboursement : Joi.string().min(1).max(7).required(),
+
 		COL_Rel_Pays : Joi.string().max(2).min(2).required(),
 		COL_Rel : Joi.string().max(6).min(1).required(),
 		LIV_Rel_Pays : Joi.string().max(2).min(2).required(),
@@ -121,6 +139,6 @@ router.post("/", (req, res) => {
 		});
 	};
 	requestXML();
-})
+});
 
 module.exports = router;

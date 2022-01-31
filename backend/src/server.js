@@ -39,4 +39,4 @@ app.use("/creationEtiquette", creationEtiquette);
 # SERVER LAUNCHING
 --------------------------------------------------------------- */
 const PORT = process.env.port || 8080;
-app.listen(PORT, ()=> console.log(`Server listening on port : ${PORT}`));
+app.listen(PORT, ()=> console.log(`Back-end server started on http://localhost:${PORT}`));
