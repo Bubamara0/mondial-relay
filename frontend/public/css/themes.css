@@ -1,0 +1,21 @@
+.theme-light{
+	--main-color : #CE0C4B;
+	--secondary-color : #F55169;
+
+	--white : #fefefe;
+	--placeholder : #d1d1d1;
+	--broken-white : #eef0f3;
+	--light-gray : #d5dee5;
+	--medium-gray : #546a79;
+}
+
+.theme-dark{
+	--main-color : #6495fd;
+	--secondary-color : #8cb1ff;
+
+	--white : #1E1E1E;
+	--placeholder : #d1d1d1;
+	--broken-white : #252526;
+	--light-gray : #414141;
+	--medium-gray : #fefefe;
+}

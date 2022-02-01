@@ -1,0 +1,4 @@
+body{
+	padding-top:  calc(var(--navbarHeight) * 2);
+	background-color: var(--white);
+}

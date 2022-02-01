@@ -1,0 +1,23 @@
+:root{
+    --navbarHeight : 4.8rem;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+    list-style: none;
+    text-decoration: inherit;
+    color: inherit;
+    font-family: "Helvetica", sans-serif;
+    font-size: 1.6rem;
+    transition: background-color .3s ease-out, filter .3s ease-out, background-image .3s ease-out;
+}
+
+html{
+    font-size : 62.5%;
+    height: 100%;
+}
+h1{font-size: 2.4rem}
+h2{font-size: 2.2rem}
+h3{font-size: 1.8rem}
