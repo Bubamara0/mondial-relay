@@ -10,7 +10,7 @@ document.getElementsByName("Rue_expediteur")[0].value = "Rue du petit pois";
 document.getElementsByName("Ville_expediteur")[0].value = "Dinard";
 document.getElementsByName("Code_postal_expediteur")[0].value = "35800";
 document.getElementsByName("Pays_expediteur")[0].value = "FR";
-document.getElementsByName("Telephone_expediteur")[0].value = "+33666666666";
+document.getElementsByName("Telephone_expediteur")[0].value = "+33102030405";
 document.getElementsByName("Mail_expediteur")[0].value = "johndoe@gmail.com";
 
 document.getElementsByName("Langage_destinataire")[0].value = "FR";
@@ -22,7 +22,7 @@ document.getElementsByName("Rue_destinataire")[0].value = "Rue du gaspacho";
 document.getElementsByName("Ville_destinataire")[0].value = "Dinan";
 document.getElementsByName("Code_postal_destinataire")[0].value = "22100";
 document.getElementsByName("Pays_destinataire")[0].value = "FR";
-document.getElementsByName("Telephone_destinataire")[0].value = "+33666666666";
+document.getElementsByName("Telephone_destinataire")[0].value = "+33102030405";
 document.getElementsByName("Mail_destinataire")[0].value = "tomate35@gmail.com";
 
 document.getElementsByName("Poids")[0].value = "20";
