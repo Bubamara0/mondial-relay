@@ -1,4 +1,14 @@
-.theme-light{
+:root{
+	--main-color : #CE0C4B;
+	--secondary-color : #F55169;
+
+	--white : #fefefe;
+	--placeholder : #c4c4c4;
+	--broken-white : #eef0f3;
+	--light-gray : #d5dee5;
+	--medium-gray : #546a79;
+}
+.light{
 	--main-color : #CE0C4B;
 	--secondary-color : #F55169;
 
