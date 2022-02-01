@@ -37,7 +37,11 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     })
 	
  }catch(err) {
-    console.log(err.response.data.details[0].message)
+    if (err.response.data.details === undefined) {
+        return alert("Le pays de l'expediteur, du destinataire, du mondial relay de collecte, ou du mondial relay de livraison n'est pas correct")
+    }
+
+    alert(err.response.data.details[0].message)
  }
 
 })

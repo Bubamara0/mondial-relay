@@ -23,9 +23,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 router.post("/villeCP", (req, res) => {
 	const schema = Joi.object({
 		Pays: Joi.string().min(2).max(2),
-		Ville : Joi.string(),
-		CP : Joi.string(),
-		NombreResultats : Joi.string()
+		Ville : Joi.string().min(2).max(26),
+		CP : Joi.string().min(2).max(10),
+		NombreResultats : Joi.string().min(1).max(30)
 	});
 
 	const { error } = schema.validate(req.body);
