@@ -271,6 +271,14 @@ form input[type="submit"]:hover{
 				width: max-content;
 				padding: .2rem .8rem;
 			}
+			.pr-schedule-separadots {
+				display: flex;
+				flex-grow: 1;
+				background-image: url("../img/dot.png");
+				background-position: center;
+				background-size: 4px;
+				background-repeat: repeat-x;
+			}
 			.pr-current-schedule {
 				padding: .8rem;
 			}
