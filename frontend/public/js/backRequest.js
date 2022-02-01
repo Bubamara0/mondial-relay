@@ -5,7 +5,6 @@ import { object } from "joi";
 document.querySelector("form").addEventListener("submit", async (e) => {
 
 	e.preventDefault()
-    console.log(axios)
     try {
 	await axios.post(`http://localhost:${PORT}/creationEtiquette`, {
 		ModeCol : document.getElementsByName("ModeCol")[0].value,
@@ -38,9 +37,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     })
 	
  }catch(err) {
-     if(err) {
-        console.log(err.message)
-     }
+    console.log(err.response.data.details[0].message)
  }
 
 })

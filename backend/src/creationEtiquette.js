@@ -24,8 +24,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 --------------------------------------------------------------- */
 router.post("/", (req, res) => {
 
-	console.log(req.body)
-
 	const schema = Joi.object({
 		ModeCol : Joi.string().max(3).min(3).required(),
 		ModeLiv : Joi.string().max(3).min(3).required(),
@@ -55,7 +53,7 @@ router.post("/", (req, res) => {
 	});
 
 	const { error } = schema.validate(req.body);
-	if (error) return res.status(400).send(`Bad Request!\n${error.details[0].message}`);
+	if (error) return res.status(400).send(error);
 
 	const security = md5("BDTEST13" + req.body.ModeCol + req.body.ModeLiv + req.body.Langage_expediteur + req.body.Nom_expediteur + req.body.Rue_expediteur + req.body.Ville_expediteur + req.body.Code_postal_expediteur + req.body.Pays_expediteur + req.body.Telephone_expediteur + req.body.Mail_expediteur + req.body.Langage_destinataire + req.body.Nom_destinataire + req.body.Rue_destinataire + req.body.Ville_destinataire + req.body.Code_postal_destinataire + req.body.Pays_destinataire + req.body.Telephone_destinataire + req.body.Mail_destinataire + req.body.Poids + req.body.Nombre_colis + req.body.Montant_contre_remboursement + req.body.COL_Rel_Pays + req.body.COL_Rel + req.body.LIV_Rel_Pays + req.body.LIV_Rel + "PrivateK").toUpperCase();
 	console.log(security);
