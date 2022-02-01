@@ -2,3 +2,32 @@ body{
 	padding-top:  calc(var(--navbarHeight) * 2);
 	background-color: var(--white);
 }
+#introduction{
+	display: flex;
+	flex-flow: column nowrap;
+	min-height: 100vh;
+	justify-content: center;
+	align-items: center;
+	width: 50vw;
+	margin-left: 50%;
+	transform: translate(-50%);
+}
+#introduction h1{
+	text-align: center;
+	padding: 2.4rem .8rem;
+	font-size: 3.8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: var(--main-color);
+	font-family: "quicksand", serif;
+}
+#introduction p{
+	text-align: center;
+	font-family: "quicksand", serif;
+}
+
+@media screen and (max-width: 800px) {
+	#introduction{
+		width: 90%;
+	}
+}
