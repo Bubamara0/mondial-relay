@@ -1,4 +1,4 @@
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 import axios from "axios";
 import { object } from "joi";
 
