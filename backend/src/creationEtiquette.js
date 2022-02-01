@@ -23,47 +23,31 @@ app.use(bodyParser.urlencoded({extended: true}));
 # SCRIPT START
 --------------------------------------------------------------- */
 router.post("/", (req, res) => {
+
+	console.log(req.body)
+
 	const schema = Joi.object({
 		ModeCol : Joi.string().max(3).min(3).required(),
 		ModeLiv : Joi.string().max(3).min(3).required(),
-
-		// --- EXPEDITEUR
 		Langage_expediteur : Joi.string().max(2).min(2).required(),
-
-		Civilite_expediteur : Joi.string().max(4).required(),
 		Nom_expediteur : Joi.string().max(32).required(),
-		Prenom_expediteur : Joi.string().max(32).required(),
-
-		Numero_Rue_expediteur : Joi.string().max(4).required(),
 		Rue_expediteur : Joi.string().max(32).required(),
-
 		Ville_expediteur : Joi.string().max(26).required(),
 		Code_postal_expediteur : Joi.string().required(),
 		Pays_expediteur : Joi.string().max(2).min(2).required(),
 		Telephone_expediteur : Joi.string().required(),
 		Mail_expediteur : Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'fr'] } }).required(),
-
-		// --- DESTINATAIRE
 		Langage_destinataire : Joi.string().max(2).min(2).required(),
-
-		Civilite_destinataire : Joi.string().max(4).required(),
 		Nom_destinataire : Joi.string().max(32).required(),
-		Prenom_destinataire : Joi.string().max(32).required(),
-
-		Numero_Rue_destinataire : Joi.string().max(4).required(),
 		Rue_destinataire : Joi.string().max(32).required(),
-
 		Ville_destinataire : Joi.string().max(26).required(),
 		Code_postal_destinataire : Joi.string().required(),
 		Pays_destinataire : Joi.string().max(2).min(2).required(),
 		Telephone_destinataire : Joi.string().required(),
 		Mail_destinataire : Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'fr'] } }).required(),
-
-		// --- COLIS
 		Poids : Joi.string().min(1).max(7).required(),
 		Nombre_colis : Joi.string().min(1).max(2).required(),
 		Montant_contre_remboursement : Joi.string().min(1).max(7).required(),
-
 		COL_Rel_Pays : Joi.string().max(2).min(2).required(),
 		COL_Rel : Joi.string().max(6).min(1).required(),
 		LIV_Rel_Pays : Joi.string().max(2).min(2).required(),
@@ -85,16 +69,16 @@ router.post("/", (req, res) => {
 					<ModeCol>${req.body.ModeCol}</ModeCol>
 					<ModeLiv>${req.body.ModeLiv}</ModeLiv>
 					<Expe_Langage>${req.body.Langage_expediteur}</Expe_Langage>
-					<Expe_Ad1>${req.body.Civilite_expediteur}_${req.body.Prenom_expediteur}_${req.body.Nom_expediteur}</Expe_Ad1>
-					<Expe_Ad3>${req.body.Rue_expediteur.replace(" ", "_")},_${req.body.Numero_Rue_expediteur}</Expe_Ad3>
+					<Expe_Ad1>${req.body.Nom_expediteur}</Expe_Ad1>
+					<Expe_Ad3>${req.body.Rue_expediteur}</Expe_Ad3>
 					<Expe_Ville>${req.body.Ville_expediteur}</Expe_Ville>
 					<Expe_CP>${req.body.Code_postal_expediteur}</Expe_CP>
 					<Expe_Pays>${req.body.Pays_expediteur}</Expe_Pays>
 					<Expe_Tel1>${req.body.Telephone_expediteur}</Expe_Tel1>
 					<Expe_Mail>${req.body.Mail_expediteur}</Expe_Mail>
 					<Dest_Langage>${req.body.Langage_destinataire}</Dest_Langage>
-					<Dest_Ad1>${req.body.Civilite_destinataire}_${req.body.Prenom_destinataire}_${req.body.Nom_destinataire}</Dest_Ad1>
-					<Dest_Ad3>${req.body.Rue_destinataire.replace(" ", "_")},_${req.body.Numero_Rue_destinataire}</Dest_Ad3>
+					<Dest_Ad1>${req.body.Nom_destinataire}</Dest_Ad1>
+					<Dest_Ad3>${req.body.Rue_destinataire}</Dest_Ad3>
 					<Dest_Ville>${req.body.Ville_destinataire}</Dest_Ville>
 					<Dest_CP>${req.body.Code_postal_destinataire}</Dest_CP>
 					<Dest_Pays>${req.body.Pays_destinataire}</Dest_Pays>
