@@ -1,5 +1,5 @@
 document.getElementsByName("ModeCol")[0].value = "CCC";
-document.getElementsByName("ModeLiv")[0].value = "24H";
+document.getElementsByName("ModeLiv")[0].value = "24L";
 
 document.getElementsByName("Langage_expediteur")[0].value = "FR";
 document.getElementsByName("Civilite_expediteur")[0].value = "MR";
