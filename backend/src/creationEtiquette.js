@@ -34,7 +34,7 @@ router.post("/", (req, res) => {
 		Nom_expediteur : Joi.string().max(32).required(),
 		Prenom_expediteur : Joi.string().max(32).required(),
 
-		Numero_Rue_expediteur : Joi.string().max(32).required(),
+		Numero_Rue_expediteur : Joi.string().max(4).required(),
 		Rue_expediteur : Joi.string().max(32).required(),
 
 		Ville_expediteur : Joi.string().max(26).required(),
@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
 		Nom_destinataire : Joi.string().max(32).required(),
 		Prenom_destinataire : Joi.string().max(32).required(),
 
-		Numero_Rue_destinataire : Joi.string().max(32).required(),
+		Numero_Rue_destinataire : Joi.string().max(4).required(),
 		Rue_destinataire : Joi.string().max(32).required(),
 
 		Ville_destinataire : Joi.string().max(26).required(),
@@ -67,7 +67,7 @@ router.post("/", (req, res) => {
 		COL_Rel_Pays : Joi.string().max(2).min(2).required(),
 		COL_Rel : Joi.string().max(6).min(1).required(),
 		LIV_Rel_Pays : Joi.string().max(2).min(2).required(),
-		LIV_Rel : Joi.string().max(6).min(1).required(),
+		LIV_Rel : Joi.string().max(6).min(1).required()
 	});
 
 	const { error } = schema.validate(req.body);
@@ -85,16 +85,16 @@ router.post("/", (req, res) => {
 					<ModeCol>${req.body.ModeCol}</ModeCol>
 					<ModeLiv>${req.body.ModeLiv}</ModeLiv>
 					<Expe_Langage>${req.body.Langage_expediteur}</Expe_Langage>
-					<Expe_Ad1>${req.body.Nom_expediteur}</Expe_Ad1>
-					<Expe_Ad3>${req.body.Rue_expediteur}</Expe_Ad3>
+					<Expe_Ad1>${req.body.Civilite_expediteur}_${req.body.Prenom_expediteur}_${req.body.Nom_expediteur}</Expe_Ad1>
+					<Expe_Ad3>${req.body.Rue_expediteur.replace(" ", "_")},_${req.body.Numero_Rue_expediteur}</Expe_Ad3>
 					<Expe_Ville>${req.body.Ville_expediteur}</Expe_Ville>
 					<Expe_CP>${req.body.Code_postal_expediteur}</Expe_CP>
 					<Expe_Pays>${req.body.Pays_expediteur}</Expe_Pays>
 					<Expe_Tel1>${req.body.Telephone_expediteur}</Expe_Tel1>
 					<Expe_Mail>${req.body.Mail_expediteur}</Expe_Mail>
 					<Dest_Langage>${req.body.Langage_destinataire}</Dest_Langage>
-					<Dest_Ad1>${req.body.Nom_destinataire}</Dest_Ad1>
-					<Dest_Ad3>${req.body.Rue_destinataire}</Dest_Ad3>
+					<Dest_Ad1>${req.body.Civilite_destinataire}_${req.body.Prenom_destinataire}_${req.body.Nom_destinataire}</Dest_Ad1>
+					<Dest_Ad3>${req.body.Rue_destinataire.replace(" ", "_")},_${req.body.Numero_Rue_destinataire}</Dest_Ad3>
 					<Dest_Ville>${req.body.Ville_destinataire}</Dest_Ville>
 					<Dest_CP>${req.body.Code_postal_destinataire}</Dest_CP>
 					<Dest_Pays>${req.body.Pays_destinataire}</Dest_Pays>
@@ -128,7 +128,7 @@ router.post("/", (req, res) => {
 
 			if (beforeFormating[0].ExpeditionNum === undefined) {
 				return res.status(400).send(`Bad Request !\n API status code : ${formatingError}`);
-			}   
+			}
 			const tmp = {
 				Numero_expedition : beforeFormating[0].ExpeditionNum[0],
 				URL_Etiquette : `https://mondialrelay.com${beforeFormating[0].URL_Etiquette[0]}`
