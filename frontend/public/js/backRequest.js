@@ -1,6 +1,6 @@
 const PORT = process.env.PORT || 8080;
 import axios from "axios"
-import { object } from "joi";
+import {object} from "joi";
 
 document.querySelector("form").addEventListener("submit", async (e) => {
 
