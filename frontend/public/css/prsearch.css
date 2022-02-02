@@ -192,6 +192,7 @@ form input[type="submit"]:hover{
 	background-color: #29292988;
 	backdrop-filter: blur(8px);
 	animation: fadeIn .3s ease-out;
+	overflow: hidden;
 }
 @keyframes fadeIn {
 	0%{
@@ -229,18 +230,22 @@ form input[type="submit"]:hover{
 				min-width: 3.2rem;
 				max-width: 8.6rem;
 				object-fit: cover;
-				border-radius: 99rem;
-				margin: .4rem .8rem;
+				margin: .4rem auto;
 			}
 			.pr-name {
 				font-family : "quicksand", sans-serif;
 				color: var(--main-color);
 				margin: .4rem .8rem;
 			}
-			.pr-address {
+			.pr-address,
+			.pr-distance {
 				display: flex;
 				flex-flow: row wrap;
 				margin: .4rem .8rem;
+			}
+			.pr-distance {
+				/* Importer un système de géolocalisation avant d'afficher la distance */
+				display: none;
 			}
 			.pr-schedules-box {
 				display: flex;
@@ -264,6 +269,7 @@ form input[type="submit"]:hover{
 			.pr-schedule {
 				display: flex;
 				justify-content: flex-start;
+				padding-left: .8rem;
 			}
 			.pr-schedule p {
 				display: flex;
@@ -271,13 +277,9 @@ form input[type="submit"]:hover{
 				width: max-content;
 				padding: .2rem .8rem;
 			}
-			.pr-schedule-separadots {
+			.pr-schedule-separator {
 				display: flex;
 				flex-grow: 1;
-				background-image: url("../img/dot.png");
-				background-position: center;
-				background-size: 4px;
-				background-repeat: repeat-x;
 			}
 			.pr-current-schedule {
 				padding: .8rem;

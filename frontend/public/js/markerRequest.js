@@ -1,12 +1,15 @@
 const PORT = 3000;
 import axios from "axios";
-import {
-	object
-} from "joi";
+import {object} from "joi";
+
 document.querySelector("form").addEventListener("submit", async (e) => {
 	e.preventDefault();
 	document.querySelector("#loading").style.display = "flex";
 	document.querySelector("#map").style.display = "none";
+
+	if (parseInt(document.getElementsByName("NombreResultats")[0].value) > 30) {
+		document.getElementsByName("NombreResultats")[0].value = 30;
+	};
 
 	try {
 		const { data } = await axios.post(`http://localhost:${PORT}/prsearch/villeCP`, {
@@ -68,28 +71,9 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 		map.dragRotate.disable();
 		map.touchZoomRotate.disableRotation();
 
+		console.clear();
+
 		// Add markers to the map.
-		for (const marker of geojson.features) {
-			// Create a DOM element for each marker.
-			const el = document.createElement("div");
-			const width = marker.properties.iconSize[0];
-			const height = marker.properties.iconSize[1];
-			el.className = "marker";
-			el.style.backgroundImage = `url(https://placekitten.com/g/${width}/${height}/)`;
-			el.style.width = `${width}px`;
-			el.style.height = `${height}px`;
-			el.style.backgroundSize = "100%";
-
-			el.addEventListener("click", () => {
-				window.alert(marker.properties.message);
-			});
-
-			// Add markers to the map.
-			new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
-		}
-
-		const capitalize = (v) => v.charAt(0).toUpperCase() + v.slice(1).toLowerCase();
-
 		data.forEach(pr => {
 			const marker = new mapboxgl.Marker().setLngLat([
 				parseFloat(pr.Coordonnees.Longitude.trim().replace(",", ".")),
@@ -99,6 +83,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 			marker._element.addEventListener("click", (e)=> {
 				document.querySelector(".pr-name").innerText = pr.Adresse.split(",")[0];
 				document.querySelector(".pr-address").innerText = pr.Adresse.split(",")[1];
+				document.querySelector(".pr-distance").innerText = pr.Distance;
 
 				// Tri des horaires
 				let schedules = {
@@ -113,16 +98,16 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 				Object.keys(pr.Horaires).forEach((jour, i) => {
 					jour.split("_").forEach(day => {
 						schedules[day] = pr.Horaires[jour];
-						console.log(schedules[day]);
+						// console.log(schedules[day]);
 					});
 				});
 				Object.keys(schedules).forEach((jour, i) => {
 					document.querySelectorAll(".pr-schedule")[i].innerHTML = `<p>${schedules[jour]}</p>`;
-				})
-				const getCurrentSchedules = (today = new Date().getDay()) => {
+				});
+				const getCurrentSchedule = (dayId = new Date().getDay()) => {
 					let tmp = "";
 					// Récupération des horaires actuelles
-					switch (today) {
+					switch (dayId) {
 						case 0:
 							tmp = schedules["Dimanche"];
 							break;
@@ -160,42 +145,86 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 				};
 				
 				const showCurrentSchedule = () => {
-					const tmp = getCurrentSchedules();
+					const time = getCurrentSchedule();
+					console.log(time);
+
+					const scheduleOpened = e => {
+						e.innerText = "Actuellement ouvert";
+						e.style.setProperty("color", "lime");
+					};
+					const scheduleClosed = e => {
+						e.innerText = "Actuellement fermé";
+						e.style.setProperty("color", "red");
+					}
+
+					console.log(getCurrentSchedule());
 
 					// Comparing actual time to schedules
-					if (new Date().getHours() >= tmp.openHour && new Date().getHours() <= tmp.closeHour) {
-						if (new Date().getMinutes() >= tmp.openMinute && new Date().getMinutes() <= tmp.closeMinute) {
-							document.querySelector(".pr-current-schedule").innerText = "Actuellement ouvert !";
-							document.querySelector(".pr-current-schedule").style.setProperty("color", "lime");
+					const currentScheduleTag = document.querySelector(".pr-current-schedule");
+					const h = new Date().getHours();
+					const m = new Date().getMinutes();
+					const isBetweenHours = h >= time.openHour && h <= (time.closeHour <= time.openHour ?
+						(time.closeHour + time.openHour)
+						:
+						time.closeHour
+					);
+					const isBetweenMinutes = m >= time.openMinute && m <= (time.closeMinute <= time.openMinute ?
+						(time.closeMinute + time.openMinute)
+						:
+						time.closeMinute
+					);
+					console.log(time.closeMinute <= time.openMinute ?
+						(time.closeMinute + time.openMinute) === 0 ?
+							60
+							:
+							(time.closeMinute + time.openMinute)
+						:
+						time.closeMinute
+					);
+					// console.log(isBetweenHours);
+					console.log(new Date().getMinutes(), "est supérieur à", time.openMinute, ":", new Date().getMinutes() >= time.openMinute);
+					console.log(new Date().getMinutes(), "est inférieur à", (time.closeMinute <= time.openMinute ?
+						(time.closeMinute + time.openMinute)
+						:
+						time.closeMinute
+					), ":", isBetweenMinutes);
+					// console.log(isBetweenMinutes);
+					if (isBetweenHours) {
+						if (isBetweenMinutes){
+							scheduleOpened(currentScheduleTag);
 						} else {
-							document.querySelector(".pr-current-schedule").innerText = "Actuellement fermé !";
-							document.querySelector(".pr-current-schedule").style.setProperty("color", "red");
+							scheduleClosed(currentScheduleTag);
 						}
 					} else {
-						document.querySelector(".pr-current-schedule").innerText = "Actuellement fermé !";
-						document.querySelector(".pr-current-schedule").style.setProperty("color", "red");
+						scheduleClosed(currentScheduleTag);
 					}
-				}
+				};
 				showCurrentSchedule();
 				showMapOverlay();
 			});
 		});
-
-		const marker = new mapboxgl.Marker().setLngLat([-2.05492, 48.6315]).addTo(map);
 	} catch (err) {
 		console.log(err.message);
-	}
+	};
 });
 
-const showMapOverlay = () => {
-	document.querySelector(".map-overlay").style.setProperty("display", "flex");
-}
-
-const hideMapOverlay = () => {
-	document.querySelector(".map-overlay").style.setProperty("display", "none");
-};
+const capitalize = (v) => v.charAt(0).toUpperCase() + v.slice(1).toLowerCase();
+const showMapOverlay = () => document.querySelector(".map-overlay").style.setProperty("display", "flex");
+const hideMapOverlay = () => document.querySelector(".map-overlay").style.setProperty("display", "none");
 
 document.querySelector(".map-overlay-closer").addEventListener("click", (e) => {
 	e.preventDefault();
 	hideMapOverlay();
+});
+
+import boxImg from "../img/box.png";
+import box2Img from "../img/box2.png";
+const box = document.querySelector(".pr-photo");
+
+box.setAttribute("src", boxImg)
+box.style.setProperty("cursor", "pointer");
+
+box.addEventListener("click", () => {
+	if (box.getAttribute("src") === boxImg) box.setAttribute("src", box2Img);
+	else box.setAttribute("src", boxImg);
 });
