@@ -116,7 +116,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 						return;
 					} else {
 						// Get minutes remaining before pr closes
-						function minsBeforeClosure(_openDate, _now, _closeDate) {
+						const minsBeforeClosure = (_openDate, _now, _closeDate) => {
 							try {
 								// Formating dates
 								if (_openDate > _now && _closeDate < _now) {
@@ -131,7 +131,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 							};
 						};
 
-						const now = new Date(2022, 1, 2, 18, 50);
+						const now = new Date();
 						const openDate = new Date();
 						openDate.setHours(schedule.openHour);
 						openDate.setMinutes(schedule.openMinute);
@@ -184,6 +184,7 @@ box.setAttribute("src", boxImg)
 box.style.setProperty("cursor", "pointer");
 
 box.addEventListener("click", () => {
-	if (box.getAttribute("src") === boxImg) box.setAttribute("src", box2Img);
-	else box.setAttribute("src", boxImg);
+	if (box.getAttribute("src") === boxImg) {
+		box.setAttribute("src", box2Img);
+	} else box.setAttribute("src", boxImg);
 });
