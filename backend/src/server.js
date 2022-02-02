@@ -112,7 +112,7 @@ app.post("/api/findUser", (req, res) => {
         });
 
 
-        if(user !== undefined) {
+        if(user) {
             res.status(200).send(`Found user ! \n ${user}`);
         } else {
             res.status(404).send("User not found");
