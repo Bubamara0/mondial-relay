@@ -7,15 +7,18 @@
     "start": "concurrently --raw \"npm run front\" \"npm run back\"",
     "front": "cd frontend && npm start",
     "back": "cd backend && npm start",
-    "iall" : "concurrently --raw \"npm i\" \"cd frontend && npm i\" \"cd backend && npm i\""
+    "db": "cd backend && npm run dev",
+    "iall": "concurrently --raw \"npm i\" \"cd frontend && npm i\" \"cd backend && npm i\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.24.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
     "concurrently": "^7.0.0",
+    "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
@@ -23,6 +26,7 @@
     "fast-xml-parser": "^4.0.1",
     "joi": "^17.5.0",
     "md5": "^2.3.0",
+    "mongoose": "^6.1.9",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "xml2js": "^0.4.23"

@@ -19,47 +19,8 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 				NombreResultats: document.getElementsByName("NombreResultats")[0].value,
 			}
 		);
-		// console.log(data);
 
 		mapboxgl.accessToken = "pk.eyJ1IjoicmljaGFyZGRhc3NhdXQiLCJhIjoiY2t6MmZrMHpvMGkxYTJvbXY1c3psYjhmYSJ9.f3SH9sWBhFpEg7hCo9VeNA";
-		const geojson = {
-			type: "FeatureCollection",
-			features: [{
-					type: "Feature",
-					properties: {
-						message: "Foo",
-						iconSize: [60, 60],
-					},
-					geometry: {
-						type: "Point",
-						coordinates: [-66.324462, -16.024695],
-					},
-				},
-				{
-					type: "Feature",
-					properties: {
-						message: "Bar",
-						iconSize: [50, 50],
-					},
-					geometry: {
-						type: "Point",
-						coordinates: [-61.21582, -15.971891],
-					},
-				},
-				{
-					type: "Feature",
-					properties: {
-						message: "Baz",
-						iconSize: [40, 40],
-					},
-					geometry: {
-						type: "Point",
-						coordinates: [-63.292236, -18.281518],
-					},
-				},
-			],
-		};
-
 		document.querySelector("#loading").style.setProperty("display", "none");
 		document.querySelector("#map").style.display = "flex";
 		const map = new mapboxgl.Map({
