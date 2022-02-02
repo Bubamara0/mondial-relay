@@ -63,13 +63,14 @@ const verifyToken = (req, res, next) => {
         const bearerToken = bearer[1];
         req.token = bearerToken;
         next();
+
     } else {
         res.status(403).send("Forbidden")
     
     }
 }
 
-app.post("/api/newUser", async (req,res) => {
+app.post("/api/createAccount", async (req,res) => {
     const newUser = new user(req.body)
     try {
         await newUser.save();
@@ -79,43 +80,43 @@ app.post("/api/newUser", async (req,res) => {
     }
 })
 
-app.post("/api/login", (req,res) => {
+app.post("/api/login", verifyToken, async (req,res) => {
 
-    const user = {
-        username : req.body.username,
-        password : req.body.password
-    }
+    const getUser = await user.find({
+        username: req.body.username,
+        mail : req.body.mail,
+        password: req.body.password
+    });
 
-    jwt.sign({user}, 'secretKey', (err, token) => {
-        res.send(`Security token : ${token}`)
+    // if(getUser === []) {
+    //     return res.status(404).send("User not found !")
+    // }
+
+    jwt.verify(req.token, 'secretKey', (err, authData) => {
+        if(err) {
+            res.sendStatus(403)
+        } else {
+            res.json({
+                authData
+            })
+        }
     })
 })
 
-app.post("/api/posts", verifyToken, (req, res) => {
-    jwt.verify(req.token, 'secretKey', (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
-            res.json({
-                message : "Post created...",
-                authData
-            });
+app.post("/api/getUserToken", async (req, res) => {
+
+    const getUser = await user.find({
+        username: req.body.username,
+        mail : req.body.mail,
+        password: req.body.password
+    });
+
+    jwt.sign({getUser}, 'secretKey', (err, token) => {
+        const userInfos = {
+            User : getUser,
+            SecurityToken : token 
         }
-    })
-});
 
-app.post("/api/findUser", (req, res) => {
-
-        user.find({
-            username: req.body.username,
-            password: req.body.password
-        });
-
-
-        if(user) {
-            res.status(200).send(`Found user ! \n ${user}`);
-        } else {
-            res.status(404).send("User not found");
-        }
-   
+        res.send(userInfos);
+    });
 })
