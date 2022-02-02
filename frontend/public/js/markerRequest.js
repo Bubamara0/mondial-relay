@@ -116,7 +116,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 						return;
 					} else {
 						// Get minutes remaining before pr closes
-						function minsBeforeClosure(_openDate, _now, _closeDate) {
+						const minsBeforeClosure = (_openDate, _now, _closeDate) => {
 							try {
 								// Formating dates
 								if (_openDate > _now && _closeDate < _now) {
