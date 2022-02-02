@@ -9,6 +9,7 @@ const { response, Router } = require("express");
 require("dotenv").config();
 const morgan = require("morgan");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 /* ---------------------------------------------------------------
 # EXTERNAL SCRIPTS IMPORTS
@@ -20,6 +21,8 @@ const villeCpRequest = require("./villeCpRequest");
 const coordonneesRequest = require("./coordonnesRequest");
 const creationEtiquette = require("./creationEtiquette");
 const villeCpRequestWeb = require("./villeCpRequestWeb");
+
+const dbConnect = require("../database/dbConnect");
 
 /* ---------------------------------------------------------------
 # SERVER SETTINGS
@@ -40,3 +43,23 @@ app.use("/creationEtiquette", creationEtiquette);
 --------------------------------------------------------------- */
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, ()=> console.log(`Back-end server started on http://localhost:${PORT}`));
+
+/* ---------------------------------------------------------------
+# DATABASE LAUNCHING
+--------------------------------------------------------------- */
+dbConnect;
+
+const portDB = 8080;
+app.listen(portDB, ()=> console.log(`Database started on port : ${portDB}`));
+
+const user = require("../models/userModel");
+
+app.post("/api/login", async (req,res) => {
+    const newUser = new user(req.body)
+    try {
+        await newUser.save();
+        return res.send(newUser);
+    } catch (err) {
+        res.send(err.message);
+    }
+})
