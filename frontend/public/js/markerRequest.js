@@ -106,59 +106,57 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 				};
 				
 				const showCurrentSchedule = () => {
-					const time = getCurrentSchedule();
-					console.log(time);
-
-					const scheduleOpened = e => {
-						e.innerText = "Actuellement ouvert";
-						e.style.setProperty("color", "lime");
-					};
-					const scheduleClosed = e => {
-						e.innerText = "Actuellement fermé";
-						e.style.setProperty("color", "red");
-					}
-
-					console.log(getCurrentSchedule());
-
 					// Comparing actual time to schedules
 					const currentScheduleTag = document.querySelector(".pr-current-schedule");
-					const h = new Date().getHours();
-					const m = new Date().getMinutes();
-					const isBetweenHours = h >= time.openHour && h <= (time.closeHour <= time.openHour ?
-						(time.closeHour + time.openHour)
-						:
-						time.closeHour
-					);
-					const isBetweenMinutes = m >= time.openMinute && m <= (time.closeMinute <= time.openMinute ?
-						(time.closeMinute + time.openMinute)
-						:
-						time.closeMinute
-					);
-					console.log(time.closeMinute <= time.openMinute ?
-						(time.closeMinute + time.openMinute) === 0 ?
-							60
-							:
-							(time.closeMinute + time.openMinute)
-						:
-						time.closeMinute
-					);
-					// console.log(isBetweenHours);
-					console.log(new Date().getMinutes(), "est supérieur à", time.openMinute, ":", new Date().getMinutes() >= time.openMinute);
-					console.log(new Date().getMinutes(), "est inférieur à", (time.closeMinute <= time.openMinute ?
-						(time.closeMinute + time.openMinute)
-						:
-						time.closeMinute
-					), ":", isBetweenMinutes);
-					// console.log(isBetweenMinutes);
-					if (isBetweenHours) {
-						if (isBetweenMinutes){
-							scheduleOpened(currentScheduleTag);
-						} else {
-							scheduleClosed(currentScheduleTag);
-						}
+
+					const schedule = getCurrentSchedule();
+					if (schedule === "Fermé") {
+						currentScheduleTag.innerText = "Actuellement fermé";
+						currentScheduleTag.style.setProperty("color", "red");
+						return;
 					} else {
-						scheduleClosed(currentScheduleTag);
-					}
+						// Get minutes remaining before pr closes
+						function minsBeforeClosure(_openDate, _now, _closeDate) {
+							try {
+								// Formating dates
+								if (_openDate > _now && _closeDate < _now) {
+									_openDate.setDate(_openDate.getDate() - 1);
+								} else if (_closeDate.getHours() < _openDate.getHours()) {
+									_closeDate.setDate(_closeDate.getDate() + 1);
+								};
+								
+								return Math.floor((_closeDate - _now) / 1000 / 60);
+							} catch (err) {
+								console.log(err.message);
+							};
+						};
+
+						const now = new Date(2022, 1, 2, 18, 50);
+						const openDate = new Date();
+						openDate.setHours(schedule.openHour);
+						openDate.setMinutes(schedule.openMinute);
+						openDate.setSeconds(0);
+						openDate.setMilliseconds(0);
+
+						const closeDate = new Date();
+						closeDate.setHours(schedule.closeHour);
+						closeDate.setMinutes(schedule.closeMinute);
+						closeDate.setSeconds(0);
+						closeDate.setMilliseconds(0);
+
+						if (minsBeforeClosure(openDate, now, closeDate) > 0) {
+							if (minsBeforeClosure(openDate, now, closeDate) > 0 && minsBeforeClosure(openDate, now, closeDate) < 60){
+								currentScheduleTag.innerText = `Ferme dans ${minsBeforeClosure(openDate, now, closeDate)} minutes !`;
+								currentScheduleTag.style.setProperty("color", "orange");
+							} else {
+								currentScheduleTag.innerText = "Actuellement ouvert";
+								currentScheduleTag.style.setProperty("color", "lime");
+							};
+						} else {
+							currentScheduleTag.innerText = "Actuellement fermé";
+							currentScheduleTag.style.setProperty("color", "red");
+						};
+					};
 				};
 				showCurrentSchedule();
 				showMapOverlay();
