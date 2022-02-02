@@ -10,6 +10,7 @@ require("dotenv").config();
 const morgan = require("morgan");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const sha256 = require("sha256");
 
 /* ---------------------------------------------------------------
 # EXTERNAL SCRIPTS IMPORTS
@@ -54,12 +55,67 @@ app.listen(portDB, ()=> console.log(`Database started on port : ${portDB}`));
 
 const user = require("../models/userModel");
 
-app.post("/api/login", async (req,res) => {
+const verifyToken = (req, res, next) => {
+    const bearerHeader = req.headers['authorization'];
+
+    if (typeof bearerHeader !== 'undefined') {
+        const bearer = bearerHeader.split(' ')
+        const bearerToken = bearer[1];
+        req.token = bearerToken;
+        next();
+    } else {
+        res.status(403).send("Forbidden")
+    
+    }
+}
+
+app.post("/api/newUser", async (req,res) => {
     const newUser = new user(req.body)
     try {
         await newUser.save();
-        return res.send(newUser);
+        res.send(newUser);
     } catch (err) {
         res.send(err.message);
     }
+})
+
+app.post("/api/login", (req,res) => {
+
+    const user = {
+        username : req.body.username,
+        password : req.body.password
+    }
+
+    jwt.sign({user}, 'secretKey', (err, token) => {
+        res.send(`Security token : ${token}`)
+    })
+})
+
+app.post("/api/posts", verifyToken, (req, res) => {
+    jwt.verify(req.token, 'secretKey', (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
+        } else {
+            res.json({
+                message : "Post created...",
+                authData
+            });
+        }
+    })
+});
+
+app.post("/api/findUser", (req, res) => {
+
+        user.find({
+            username: req.body.username,
+            password: req.body.password
+        });
+
+
+        if(user !== undefined) {
+            res.status(200).send(`Found user ! \n ${user}`);
+        } else {
+            res.status(404).send("User not found");
+        }
+   
 })
