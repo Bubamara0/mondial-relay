@@ -27,7 +27,7 @@ body{
 form{
 	display: flex;
 	flex-flow: column nowrap;
-	padding: .8rem;
+	/* padding: .8rem; */
 	background-color: var(--white);
 }
 
@@ -67,8 +67,11 @@ form .form-row select {
 	background: var(--white);
 	border: solid 1px var(--light-gray);
 }
+form .form-row select[disabled] {
+	color: var(--light-gray);
+}
 
-input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
 	-webkit-appearance: none;
 	margin: 0;
@@ -147,11 +150,12 @@ form input[type="submit"]:hover{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin: .8rem 0;
 	width: 80rem;
 	height: 60rem;
 	border: solid 1px var(--light-gray);
 	border-radius: .4rem;
-	background-color: #FEFEFE;
+	background-color: var(--white);
 	color: #fefefe;
 }
 #loading {

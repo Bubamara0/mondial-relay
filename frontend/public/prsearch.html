@@ -57,11 +57,23 @@
 					<div class="form-row">
 						<div class="input-box">
 							<label for="Pays">Pays</label>
-							<input type="text" name="Pays" placeholder="ex: FR" required>
+							<select class="countries-list" name="Pays">
+								<option value="" selected disabled>-- Sélectionnez un pays --</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="input-box">
+							<label for="Region">Region</label>
+							<select class="states-list" name="Region" disabled>
+								<option value="" selected disabled>-- Sélectionnez une région --</option>
+							</select>
 						</div>
 						<div class="input-box">
 							<label for="Ville">Ville</label>
-							<input type="text" name="Ville" placeholder="ex: Dinard" required>
+							<select class="cities-list" name="Ville" disabled>
+								<option value="" selected disabled>-- Sélectionnez une ville --</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-row">
@@ -194,6 +206,7 @@
 		</div>
 		<div class="copyright">2022 © Équipe 1 - IMTS</div>
 	</footer>
+	<script type="module" src="./js/fillSelect.js"></script>
 	<script type="module" src="./js/markerRequest.js"></script>
 	<script type="module" src="./js/burger.js"></script>
 	<script type="module" src="./js/theme.js"></script>

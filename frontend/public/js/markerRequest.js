@@ -2,6 +2,8 @@ const PORT = 3000;
 import axios from "axios";
 import {object} from "joi";
 
+const currentScheduleTag = document.querySelector(".pr-current-schedule");
+
 document.querySelector("form").addEventListener("submit", async (e) => {
 	e.preventDefault();
 	document.querySelector("#loading").style.display = "flex";
@@ -21,7 +23,6 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 		);
 
 		mapboxgl.accessToken = "pk.eyJ1IjoicmljaGFyZGRhc3NhdXQiLCJhIjoiY2t6MmZrMHpvMGkxYTJvbXY1c3psYjhmYSJ9.f3SH9sWBhFpEg7hCo9VeNA";
-		document.querySelector("#loading").style.setProperty("display", "none");
 		document.querySelector("#map").style.display = "flex";
 		const map = new mapboxgl.Map({
 			container: "map", // container ID
@@ -31,8 +32,6 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 		});
 		map.dragRotate.disable();
 		map.touchZoomRotate.disableRotation();
-
-		console.clear();
 
 		// Add markers to the map.
 		data.forEach(pr => {
@@ -59,60 +58,56 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 				Object.keys(pr.Horaires).forEach((jour, i) => {
 					jour.split("_").forEach(day => {
 						schedules[day] = pr.Horaires[jour];
-						// console.log(schedules[day]);
 					});
 				});
 				Object.keys(schedules).forEach((jour, i) => {
 					document.querySelectorAll(".pr-schedule")[i].innerHTML = `<p>${schedules[jour]}</p>`;
 				});
 				const getCurrentSchedule = (dayId = new Date().getDay()) => {
-					let tmp = "";
+					let dayName = "";
 					// Récupération des horaires actuelles
 					switch (dayId) {
 						case 0:
-							tmp = schedules["Dimanche"];
+							dayName = schedules["Dimanche"];
 							break;
 						case 1:
-							tmp = schedules["Lundi"];
+							dayName = schedules["Lundi"];
 							break;
 						case 2:
-							tmp = schedules["Mardi"];
+							dayName = schedules["Mardi"];
 							break;
 						case 3:
-							tmp = schedules["Mercredi"];
+							dayName = schedules["Mercredi"];
 							break;
 						case 4:
-							tmp = schedules["Jeudi"];
+							dayName = schedules["Jeudi"];
 							break;
 						case 5:
-							tmp = schedules["Vendredi"];
+							dayName = schedules["Vendredi"];
 							break;
 						case 6:
-							tmp = schedules["Samedi"];
+							dayName = schedules["Samedi"];
 							break;
 						default :
-							tmp = "Fermé";
+							dayName = "Fermé";
 					};
-					if (tmp === "Fermé") return tmp;
+					if (dayName === "Fermé") return dayName;
 					else {
-						const t = tmp.split("-").map(horaire => horaire.trim().split("h"));
+						const tmp = dayName.split("-").map(horaire => horaire.trim().split("h"));
 						return {
-							openHour : parseInt(t[0][0]),
-							openMinute : parseInt(t[0][1]),
-							closeHour : parseInt(t[1][0]),
-							closeMinute : parseInt(t[1][1]),
+							openHour : parseInt(tmp[0][0]),
+							openMinute : parseInt(tmp[0][1]),
+							closeHour : parseInt(tmp[1][0]),
+							closeMinute : parseInt(tmp[1][1]),
 						};
 					};
 				};
 				
 				const showCurrentSchedule = () => {
 					// Comparing actual time to schedules
-					const currentScheduleTag = document.querySelector(".pr-current-schedule");
-
 					const schedule = getCurrentSchedule();
 					if (schedule === "Fermé") {
-						currentScheduleTag.innerText = "Actuellement fermé";
-						currentScheduleTag.style.setProperty("color", "red");
+						setCurrentScheduleTag("Actuellement fermé", "red");
 						return;
 					} else {
 						// Get minutes remaining before pr closes
@@ -146,15 +141,12 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 
 						if (minsBeforeClosure(openDate, now, closeDate) > 0) {
 							if (minsBeforeClosure(openDate, now, closeDate) > 0 && minsBeforeClosure(openDate, now, closeDate) < 60){
-								currentScheduleTag.innerText = `Ferme dans ${minsBeforeClosure(openDate, now, closeDate)} minutes !`;
-								currentScheduleTag.style.setProperty("color", "orange");
+								setCurrentScheduleTag(`Ferme dans ${minsBeforeClosure(openDate, now, closeDate)} minutes !`, "orange");
 							} else {
-								currentScheduleTag.innerText = "Actuellement ouvert";
-								currentScheduleTag.style.setProperty("color", "lime");
+								setCurrentScheduleTag("Actuellement ouvert", "lime");
 							};
 						} else {
-							currentScheduleTag.innerText = "Actuellement fermé";
-							currentScheduleTag.style.setProperty("color", "red");
+							setCurrentScheduleTag("Actuellement fermé", "red");
 						};
 					};
 				};
@@ -165,17 +157,26 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 	} catch (err) {
 		console.log(err.message);
 	};
+	document.querySelector("#loading").style.setProperty("display", "none");
+
 });
 
 const capitalize = (v) => v.charAt(0).toUpperCase() + v.slice(1).toLowerCase();
 const showMapOverlay = () => document.querySelector(".map-overlay").style.setProperty("display", "flex");
 const hideMapOverlay = () => document.querySelector(".map-overlay").style.setProperty("display", "none");
 
+const setCurrentScheduleTag = (text, color) => {
+	currentScheduleTag.innerText = text;
+	currentScheduleTag.style.setProperty("color", color);
+}
+
 document.querySelector(".map-overlay-closer").addEventListener("click", (e) => {
 	e.preventDefault();
 	hideMapOverlay();
 });
 
+
+// Totalement inutile
 import boxImg from "../img/box.png";
 import box2Img from "../img/box2.png";
 const box = document.querySelector(".pr-photo");

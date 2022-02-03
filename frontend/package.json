@@ -11,6 +11,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"country-state-city": "^3.0.1",
 		"parcel": "^2.2.1"
 	}
 }
