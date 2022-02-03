@@ -175,7 +175,6 @@ document.querySelector(".map-overlay-closer").addEventListener("click", (e) => {
 	hideMapOverlay();
 });
 
-
 // Totalement inutile
 import boxImg from "../img/box.png";
 import box2Img from "../img/box2.png";
